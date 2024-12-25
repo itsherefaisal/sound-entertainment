@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sound Hub</title>
+    <script src="../frameworks/jquery/jquery.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .dropdown-menu {
+            transition: all 0.3s ease-in-out;
+        }
+    </style>
+</head>
+
+<body class="bg-[#160F30] text-white">
+    <header>
+        <nav class="bg-[#202040] text-white px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-3 text-xl font-bold">
+                <img src="../assets/images/sound.png" alt="Logo" class="fluid-responsive size-8">
+                <span>Sound</span>
+            </a>
+
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="../index.html" class="text-sm text-gray-300 hover:text-white">Home</a>
+                <a href="./musics.html" class="text-sm text-gray-300 hover:text-white">Music</a>
+                <a href="./videos.html" class="text-sm text-gray-300 hover:text-white">Videos</a>
+
+                <div class="relative group">
+                    <button
+                        class="flex items-center text-sm text-gray-300 hover:text-white  group-hover:text-white focus:outline-none">Categories
+                        <svg id="cate-dropdown-i" xmlns="http://www.w3.org/2000/svg"
+                            class="size-6 transition duration-300 group-hover:rotate-180" viewBox="0 0 24 24"
+                            fill="currentColor">
+                            <path
+                                d="M12 11.8284L9.17154 14.6569L7.75732 13.2426L12 9L16.2426 13.2426L14.8284 14.6569L12 11.8284Z">
+                            </path>
+                        </svg>
+                    </button>
+                    <div id="dropdown"
+                        class="absolute left-0 p-2 py-2 hidden bg-[#17153B] text-white rounded shadow-lg dropdown-menu group-hover:flex flex-col z-10">
+                        <div class="music-cata-container flex flex-col py-2 pt-4 px-4">
+                            <h1 class=" border-b py-2">Music</h1>
+                            <div class="music-cata flex my-2">
+                                <a href="./routes/categories.html?filter=album"
+                                    class="text-sm flex py-2 px-4 mx-1 min-w-28 truncate rounded-md bg-[#2E236C] transition duration-300 hover:bg-[#17153B] border border-transparent hover:border-gray-200">Album</a>
+                                <a href="./routes/categories.html?filter=artist"
+                                    class="text-sm flex py-2 px-4 mx-1 min-w-28 truncate rounded-md bg-[#2E236C] transition duration-300 hover:bg-[#17153B] border border-transparent hover:border-gray-200">Artist</a>
+                                <a href="./routes/categories.html?filter=year"
+                                    class="text-sm flex py-2 px-4 mx-1 min-w-28 truncate rounded-md bg-[#2E236C] transition duration-300 hover:bg-[#17153B] border border-transparent hover:border-gray-200">Year</a>
+                            </div>
+                        </div>
+                        <div class="movie-cata-container flex flex-col py-2 px-4">
+                            <h1 class=" border-b py-2">Movie</h1>
+                            <div class="movie-cata flex my-2">
+                                <a href="./routes/categories.html?filter=year"
+                                    class="text-sm flex py-2 px-4 mx-1 min-w-28 truncate rounded-md bg-[#2E236C] transition duration-300 hover:bg-[#17153B] border border-transparent hover:border-gray-200">Year</a>
+                                <a href="./routes/categories.html?filter=genre"
+                                    class="text-sm flex py-2 px-4 mx-1 min-w-28 truncate rounded-md bg-[#2E236C] transition duration-300 hover:bg-[#17153B] border border-transparent hover:border-gray-200">Genre</a>
+                                <a href="./routes/categories.html?filter=language"
+                                    class="text-sm flex py-2 px-4 mx-1 min-w-28 truncate rounded-md bg-[#2E236C] transition duration-300 hover:bg-[#17153B] border border-transparent hover:border-gray-200">Language</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <label for="search-bar"
+                class="hidden md:flex items-center border border-gray-500 cursor-text pl-3 bg-[#17153B] text-white rounded">
+                <input type="text" placeholder="Search music or videos..." id="search-bar"
+                    class="text-xs text-gray-300 w-44 bg-transparent outline-none border-none">
+                <button class=" text-sm text-gray-400 size-9 p-2 rounded">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-full h-full" viewBox="0 0 24 24"
+                        fill="currentColor">
+                        <path
+                            d="M11 2C15.968 2 20 6.032 20 11C20 15.968 15.968 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2ZM11 18C14.8675 18 18 14.8675 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18ZM19.4853 18.0711L22.3137 20.8995L20.8995 22.3137L18.0711 19.4853L19.4853 18.0711Z">
+                        </path>
+                    </svg>
+                </button>
+            </label>
+
+            <div class="flex space-x-2">
+                <!-- show profile container also when logged in  -->
+                <!-- <div class="relative group">
+                    <button
+                        class="flex border border-gray-500 group-hover:border-b-transparent transition duration-400 items-center bg-[#17153B] pt-1 px-1 overflow-hidden size-10 rounded-full group-hover:rounded-b-none hover:text-gray-300 focus:outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="-mb-2 text-[#C8ACD6] w-full h-full"
+                            viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M4 22C4 17.5817 7.58172 14 12 14C16.4183 14 20 17.5817 20 22H4ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13Z">
+                            </path>
+                        </svg>
+                    </button>
+                    <div id="dropdown"
+                        class="absolute right-0 p-2 py-2 text-sm hidden bg-[#17153B] text-white rounded rounded-r-none shadow-lg dropdown-menu group-hover:block z-10">
+                        <button id="show-profile" class="block truncate px-8 py-2 hover:bg-[#2E236C]">My
+                            Account</button>
+                        <a href="" class="block truncate px-8 py-2 hover:bg-[#2E236C]">Logout</a>
+                    </div>
+                </div> -->
+                <a href="./routes/login.html"
+                    class="border-2 text-sm px-6 py-2 rounded transition duration-300 border-transparent hover:border-[#2E236C] bg-[#2E236C] hover:bg-[#433D8B]">Login</a>
+                <a href="./routes/register.html"
+                    class="border-2 border-[#433D8B] text-sm px-6 py-2 rounded transition duration-300 hover:border-transparent hover:bg-[#2E236C]">Signup</a>
+            </div>
+            <!-- insert that when logged-in using php  -->
+            <!-- <div id="profile-container"
+                class="user-profile absolute hidden z-50 bg-gray-500/30 w-screen h-screen top-0 left-0 flex flex-col items-center justify-center">
+                <div
+                    class="profile bg-[#17153B] min-w-[450px] flex flex-col relative justify-between py-20 rounded-3xl px-6 min-h-[400px]">
+                    <button id="close-profile"
+                        class="bg-slate-600 hover:bg-slate-700 rounded-md p-1 absolute right-12 top-8">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="size-7"
+                                fill="currentColor">
+                                <path
+                                    d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z">
+                                </path>
+                            </svg></span>
+                    </button>
+                    <h2 class="text-center text-xl ">Your Profile</h2>
+                    <div class="profile-details">
+                        <div class="input-row flex items-center gap-2">
+                            <div class="w-full">
+                                <label for="username" class="relative text-sm text-gray-300 px-2">
+                                    username
+                                </label>
+                                <input type="text" id="username"
+                                    class="block rounded-xl bg-transparent w-full text-xs disabled:opacity-75 p-3 border border-gray-200 shadow-sm focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                                    placeholder="username" value="Faisal khan" disabled />
+                            </div>
+                            <div class="w-full">
+                                <label for="username" class="relative text-sm text-gray-300 px-2">
+                                    address
+                                </label>
+                                <input type="text" id="address"
+                                    class="block rounded-xl bg-transparent w-full text-xs disabled:opacity-75 p-3 border border-gray-200 shadow-sm focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                                    placeholder="address" value="123, street toms" disabled />
+                            </div>
+                        </div>
+                        <div class="input-row flex items-center my-3 gap-2">
+                            <div class="w-full">
+                                <label for="phone" class="relative text-sm text-gray-300 px-2">
+                                    phone
+                                </label>
+                                <input type="text" id="phone"
+                                    class="block rounded-xl bg-transparent w-full text-xs disabled:opacity-75 p-3 border border-gray-200 shadow-sm focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                                    placeholder="phone" value="+92 3337533445" disabled />
+                            </div>
+                            <div class="w-full">
+                                <label for="email" class="relative text-sm text-gray-300 px-2">
+                                    email
+                                </label>
+                                <input type="text" id="email"
+                                    class="block rounded-xl bg-transparent w-full text-xs disabled:opacity-75 p-3 border border-gray-200 shadow-sm focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                                    placeholder="email" value="example@gmail.com" disabled />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </nav>
+
+    </header>
+
+
+    <section class="min-h-[90vh] flex flex-col items-center ">
+
+        <div class="relative w-full h-36 bg-white rounded-lg shadow-lg overflow-hidde mb-32">
+            <div class="absolute inset-0 rounded-lg overflow-hidden bg-red-200">
+                <img src="https://images.unsplash.com/photo-1543794327-59a91fb815d1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=200&q=80"
+                    alt="banner">
+                <div class="absolute inset-0 backdrop backdrop-blur-10 bg-gradient-to-b from-transparent to-black">
+
+                </div>
+            </div>
+            <div class="absolute flex space-x-6 transform translate-x-6 translate-y-8">
+                <div class="w-36 h-36 rounded-lg shadow-lg overflow-hidden">
+                    <img src="../assets/images/artist-1.avif" alt="Artist">
+                </div>
+                <div class="text-white pt-12">
+                    <h3 class="font-bold">Album</h3>
+                    <div class="text-sm opacity-60">Super Interpret</div>
+                    <div class="mt-8 text-gray-400">
+                        <div class="flex items-center space-x-2 text-xs">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+                                <path
+                                    d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z">
+                                </path>
+                            </svg>
+                            <span>Easy listening</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="music-container w-full flex px-8">
+            <div id="audio-player" class="w-full bg-[#17153B] rounded-lg shadow-lg overflow-hidden">
+                <div class="relative">
+                    <img src="../assets/images/song-1.avif" class="object-cover w-full h-full">
+                    <div
+                        class="absolute p-4 inset-0 flex flex-col justify-end bg-gradient-to-b from-transparent to-gray-900 text-white">
+                        <h3 class="font-bold">Super Artist</h3>
+                        <span class="opacity-70">Album Title</span>
+                    </div>
+                </div>
+                <div id="seek-bar" class="relative h-1 bg-[#C8ACD6] cursor-pointer">
+                    <div id="progress-bar" class="absolute h-full w-0 bg-[#433D8B] flex items-center justify-end">
+                        <div class="rounded-full w-3 h-3 border border-white bg-[#2E236C] shadow"></div>
+                    </div>
+                </div>
+                <div class="flex justify-between text-xs font-semibold text-[#C8ACD6] px-4 py-3">
+                    <div id="current-time">0:00</div>
+                    <div class="flex space-x-3 p-2">
+                        <button id="play-btn"
+                            class="rounded-full w-8 h-8 flex items-center justify-center focus:outline-none">
+                            <svg id="play-icon" class="w-5 h-5 text-[#C8ACD6]" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                            </svg>
+                            <svg id="pause-icon" class="w-5 h-5 hidden" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="6" y="4" width="4" height="16"></rect>
+                                <rect x="14" y="4" width="4" height="16"></rect>
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="total-duration">0:00</div>
+                </div>
+                <!-- Volume Control -->
+                <div class="flex items-center space-x-2 px-4 w-2/4 pb-4">
+                    <div id="volume-icon" class="w-6 h-6 text-[#C8ACD6]">
+                        <!-- The SVG icons will be dynamically updated -->
+                    </div>
+                    <div id="volume-bar" class="relative h-1 bg-[#C8ACD6] flex-grow cursor-pointer">
+                        <div id="volume-progress"
+                            class="absolute h-full w-1/2 bg-[#433D8B] flex items-center justify-end">
+                            <div class="rounded-full w-3 h-3 border border-white bg-[#2E236C] shadow"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <audio id="audio" src="../assets/media/songs/vlog.mp3"></audio>
+            </div>
+
+            <ul class="w-full text-xs sm:text-base px-8 divide-y space-y-3 cursor-default">
+                <h3 class="px-3">More</h3>
+                <li
+                    class="flex w-full bg-slate-200 px-2 py-2 rounded-xl text-black justify-between items-center space-x-3">
+                    <button class="p-2 transtion duration-300 rounded-xl hover:bg-[#17153B] group focus:outline-none">
+                        <svg class="size-6 transtion duration-300 group-hover:text-slate-200" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                        </svg>
+                    </button>
+                    <div class="flex-1 text-gray-600">
+                        Artist - Title
+                    </div>
+                    <div class="text-xs text-gray-400">
+                        2:58
+                    </div>
+                </li>
+                <li
+                    class="flex w-full bg-slate-200 px-2 py-2 rounded-xl text-black justify-between items-center space-x-3">
+                    <button class="p-2 transtion duration-300 rounded-xl hover:bg-[#17153B] group focus:outline-none">
+                        <svg class="size-6 transtion duration-300 group-hover:text-slate-200" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                        </svg>
+                    </button>
+                    <div class="flex-1 text-gray-600">
+                        Artist - Title
+                    </div>
+                    <div class="text-xs text-gray-400">
+                        2:58
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+
+    </section>
+
+    <!-- <ul class="text-xs sm:text-base divide-y border-t cursor-default">
+        <li class="flex items-center space-x-3 hover:bg-gray-100">
+          <button class="p-3 hover:bg-green-500 group focus:outline-none">
+            <svg class="w-4 h-4 group-hover:text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          </button>
+          <div class="flex-1">
+            Artist - Title
+          </div>
+          <div class="text-xs text-gray-400">
+            2:58
+          </div>
+          <button class="focus:outline-none pr-4 group">
+            <svg class="w-4 h-4 group-hover:text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 9l-5 5-5-5M12 12.8V2.5"/></svg>
+          </button>
+        </li>
+        <li class="flex items-center space-x-3 hover:bg-gray-100">
+          <button class="p-3 hover:bg-green-500 group focus:outline-none">
+            <svg class="w-4 h-4 group-hover:text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          </button>
+          <div class="flex-1">
+            Artist - Title
+          </div>
+          <div class="text-xs text-gray-400">
+            2:58
+          </div>
+          <button class="focus:outline-none pr-4 group">
+            <svg class="w-4 h-4 group-hover:text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 9l-5 5-5-5M12 12.8V2.5"/></svg>
+          </button>
+        </li>
+      </ul> -->
+    <footer class=" rounded-lg shadow bg-[#202040] mt-16">
+        <div class="w-full max-w-screen-xl mx-auto py-6 md:py-12">
+            <div class="sm:flex sm:items-center sm:justify-between">
+                <a href="" class="flex items-center mb-2 sm:mb-0 space-x-3 rtl:space-x-reverse">
+                    <img src="../assets/images/sound.png" class="h-8" alt="Sound" />
+                    <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Sound</span>
+                </a>
+                <ul
+                    class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
+                    <li>
+                        <a href="#" class="hover:underline me-4 md:me-6">About</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline me-4 md:me-6">Privacy Policy</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline me-4 md:me-6">Licensing</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-4" />
+            <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href=""
+                    class="hover:underline">Sound™</a>. All Rights Reserved.</span>
+        </div>
+    </footer>
+
+
+    <script>
+        $(document).ready(function () {
+
+            // code for profile show hide 
+            $('#show-profile').on('click', function () {
+                $('#profile-container')
+                    .fadeIn(300)
+                    .css('display', 'flex');
+                $('body').css('overflow', 'hidden');
+            });
+
+            $('#close-profile').on('click', function () {
+                $('#profile-container').fadeOut(300);
+                $('body').css('overflow', 'auto');
+            });
+            const audio = $('#audio')[0];
+            const playBtn = $('#play-btn');
+            const playIcon = $('#play-icon');
+            const pauseIcon = $('#pause-icon');
+            const progressBar = $('#progress-bar');
+            const currentTimeDisplay = $('#current-time');
+            const totalDurationDisplay = $('#total-duration');
+            const volumeBar = $('#volume-bar');
+            const volumeProgress = $('#volume-progress');
+            const volumeIcon = $('#volume-icon');
+            const muteBtn = $('#mute-btn');
+
+            let isMuted = false;
+            let lastVolume = 0.5;
+
+            const svgHigh = `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M6.60282 10.0001L10 7.22056V16.7796L6.60282 14.0001H3V10.0001H6.60282ZM2 16.0001H5.88889L11.1834 20.3319C11.2727 20.405 11.3846 20.4449 11.5 20.4449C11.7761 20.4449 12 20.2211 12 19.9449V4.05519C12 3.93977 11.9601 3.8279 11.887 3.73857C11.7121 3.52485 11.3971 3.49335 11.1834 3.66821L5.88889 8.00007H2C1.44772 8.00007 1 8.44778 1 9.00007V15.0001C1 15.5524 1.44772 16.0001 2 16.0001ZM23 12C23 15.292 21.5539 18.2463 19.2622 20.2622L17.8445 18.8444C19.7758 17.1937 21 14.7398 21 12C21 9.26016 19.7758 6.80629 17.8445 5.15557L19.2622 3.73779C21.5539 5.75368 23 8.70795 23 12ZM18 12C18 10.0883 17.106 8.38548 15.7133 7.28673L14.2842 8.71584C15.3213 9.43855 16 10.64 16 12C16 13.36 15.3213 14.5614 14.2842 15.2841L15.7133 16.7132C17.106 15.6145 18 13.9116 18 12Z"></path>
+</svg>`;
+            const svgMedium = `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M13 7.22056L9.60282 10.0001H6V14.0001H9.60282L13 16.7796V7.22056ZM8.88889 16.0001H5C4.44772 16.0001 4 15.5524 4 15.0001V9.00007C4 8.44778 4.44772 8.00007 5 8.00007H8.88889L14.1834 3.66821C14.3971 3.49335 14.7121 3.52485 14.887 3.73857C14.9601 3.8279 15 3.93977 15 4.05519V19.9449C15 20.2211 14.7761 20.4449 14.5 20.4449C14.3846 20.4449 14.2727 20.405 14.1834 20.3319L8.88889 16.0001ZM18.8631 16.5911L17.4411 15.1691C18.3892 14.4376 19 13.2902 19 12.0001C19 10.5697 18.2493 9.31476 17.1203 8.60766L18.5589 7.16906C20.0396 8.26166 21 10.0187 21 12.0001C21 13.8422 20.1698 15.4905 18.8631 16.5911Z"></path>
+</svg>`;
+            const svgMuted = `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M10 7.22056L6.60282 10.0001H3V14.0001H6.60282L10 16.7796V7.22056ZM5.88889 16.0001H2C1.44772 16.0001 1 15.5524 1 15.0001V9.00007C1 8.44778 1.44772 8.00007 2 8.00007H5.88889L11.1834 3.66821C11.3971 3.49335 11.7121 3.52485 11.887 3.73857C11.9601 3.8279 12 3.93977 12 4.05519V19.9449C12 20.2211 11.7761 20.4449 11.5 20.4449C11.3846 20.4449 11.2727 20.405 11.1834 20.3319L5.88889 16.0001ZM20.4142 12.0001L23.9497 15.5356L22.5355 16.9498L19 13.4143L15.4645 16.9498L14.0503 15.5356L17.5858 12.0001L14.0503 8.46454L15.4645 7.05032L19 10.5859L22.5355 7.05032L23.9497 8.46454L20.4142 12.0001Z"></path>
+</svg>`;
+
+            function updateVolumeIcon(volume) {
+                if (isMuted || volume === 0) {
+                    volumeIcon.html(svgMuted);
+                } else if (volume > 0.7) {
+                    volumeIcon.html(svgHigh);
+                } else {
+                    volumeIcon.html(svgMedium);
+                }
+            }
+            // set 50% volume at start 
+            audio.volume = 0.5;
+            updateVolumeIcon(0.5);
+
+            function formatTime(seconds) {
+                const mins = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${mins}:${secs < 10 ? '0' + secs : secs}`;
+            }
+
+            // Load metadata and set total duration
+            audio.addEventListener('loadedmetadata', () => {
+                totalDurationDisplay.text(formatTime(audio.duration));
+            });
+
+            // Play/Pause toggle
+            playBtn.on('click', () => {
+                if (audio.paused) {
+                    audio.play();
+                    playIcon.addClass('hidden');
+                    pauseIcon.removeClass('hidden');
+                } else {
+                    audio.pause();
+                    playIcon.removeClass('hidden');
+                    pauseIcon.addClass('hidden');
+                }
+            });
+
+            // Update progress bar and current time
+            audio.addEventListener('timeupdate', () => {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                progressBar.css('width', `${progress}%`);
+                currentTimeDisplay.text(formatTime(audio.currentTime));
+            });
+
+            // Seek functionality
+            $('#seek-bar').on('click', function (e) {
+                const offsetX = e.offsetX;
+                const totalWidth = $(this).width();
+                const seekTime = (offsetX / totalWidth) * audio.duration;
+                audio.currentTime = seekTime;
+            });
+
+            // Handle volume changes
+            volumeBar.on('mousedown', (e) => {
+                const updateVolume = (e) => {
+                    const offsetX = e.pageX - volumeBar.offset().left;
+                    const totalWidth = volumeBar.width();
+                    const volume = Math.min(Math.max(offsetX / totalWidth, 0), 1);
+                    audio.volume = volume;
+                    volumeProgress.css('width', `${volume * 100}%`);
+                    updateVolumeIcon(volume);
+                    isMuted = false;
+                };
+
+                $(document).on('mousemove', updateVolume);
+                $(document).on('mouseup', () => {
+                    $(document).off('mousemove', updateVolume);
+                });
+
+                updateVolume(e);
+            });
+
+        });
+
+    </script>
+</body>
+
+</html>
