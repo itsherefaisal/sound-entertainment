@@ -147,10 +147,11 @@ while ($song = mysqli_fetch_assoc($related_songs_result)) {
 $song_id = $song['music_id'];
 $title = $song['title'];
 $artist_name = $song['artist_name'];
+$song_year = $song['year'];
 
 ?>
 <li class="flex w-full bg-slate-200 px-2 py-2 rounded-xl text-black justify-between items-center space-x-3">
-    <button class="p-2 transition duration-300 rounded-xl hover:bg-[#17153B] group focus:outline-none">
+    <button onclick="window.location.href = './music.php?music_id=<?= $song_id?>'" class="p-2 transition duration-300 rounded-xl hover:bg-[#17153B] group focus:outline-none">
         <svg class="size-6 transition duration-300 group-hover:text-slate-200" viewBox="0 0 24 24"
             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
             stroke-linejoin="round">
@@ -161,7 +162,7 @@ $artist_name = $song['artist_name'];
         <?= $artist_name ?> - <?= $title ?>
     </div>
     <div class="text-xs text-gray-400">
-        Duration
+    <?= $song_year?>
     </div>
 </li>
 <?php
