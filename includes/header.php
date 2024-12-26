@@ -130,22 +130,22 @@ if (ROUTE === "index") {
                         <div class="music-cata-container flex flex-col py-2 pt-4 px-4">
                             <h1 class=" border-b py-2">Music</h1>
                             <div class="music-cata flex my-2">
-                                <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=album' : './categories.php?filter=album'; ?>"
+                                <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=Album&type=music' : './categories.php?filter=album'; ?>"
                                     class="text-sm flex py-2 px-4 mx-1 min-w-28 truncate rounded-md bg-[#2E236C] transition duration-300 hover:bg-[#17153B] border border-transparent hover:border-gray-200">Album</a>
-                                <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=artist' : './categories.php?filter=artist'; ?>"
+                                <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=Artist&type=music' : './categories.php?filter=artist'; ?>"
                                     class="text-sm flex py-2 px-4 mx-1 min-w-28 truncate rounded-md bg-[#2E236C] transition duration-300 hover:bg-[#17153B] border border-transparent hover:border-gray-200">Artist</a>
-                                <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=year' : './categories.php?filter=year'; ?>"
+                                <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=Year&type=music' : './categories.php?filter=year'; ?>"
                                     class="text-sm flex py-2 px-4 mx-1 min-w-28 truncate rounded-md bg-[#2E236C] transition duration-300 hover:bg-[#17153B] border border-transparent hover:border-gray-200">Year</a>
                             </div>
                         </div>
                         <div class="movie-cata-container flex flex-col py-2 px-4">
                             <h1 class=" border-b py-2">Movie</h1>
                             <div class="movie-cata flex my-2">
-                                <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=year' : './categories.php?filter=year'; ?>"
+                                <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=Year&type=video' : './categories.php?filter=year'; ?>"
                                     class="text-sm flex py-2 px-4 mx-1 min-w-28 truncate rounded-md bg-[#2E236C] transition duration-300 hover:bg-[#17153B] border border-transparent hover:border-gray-200">Year</a>
-                                <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=genre' : './categories.php?filter=genre'; ?>"
+                                <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=Genre&type=video' : './categories.php?filter=genre'; ?>"
                                     class="text-sm flex py-2 px-4 mx-1 min-w-28 truncate rounded-md bg-[#2E236C] transition duration-300 hover:bg-[#17153B] border border-transparent hover:border-gray-200">Genre</a>
-                                <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=language' : './categories.php?filter=language'; ?>"
+                                <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=Language&type=video' : './categories.php?filter=language'; ?>"
                                     class="text-sm flex py-2 px-4 mx-1 min-w-28 truncate rounded-md bg-[#2E236C] transition duration-300 hover:bg-[#17153B] border border-transparent hover:border-gray-200">Language</a>
 
                             </div>
