@@ -12,46 +12,48 @@ include_once("./includes/header.php");
 
     <div class="music-bottom my-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 lg:grid-cols-5 gap-6">
 
-        <?php
-$query = "SELECT music_id, title, year, cover_image, artist_id FROM music ORDER BY created_at DESC LIMIT 5";
-
-$result = mysqli_query($conn, $query);
-
-if ($result) {
-    while ($row = mysqli_fetch_assoc($result)) {
-        $music_id = $row['music_id'];
-        $title = $row['title'];
-        $year = $row['year'];
-        $cover_image = $row['cover_image'];
-        $artist_id = $row['artist_id'];
-
-        $artist_query = "SELECT name FROM artists WHERE artist_id = $artist_id";
-        $artist_result = mysqli_query($conn, $artist_query);
-        $artist = mysqli_fetch_assoc($artist_result)['name'];
-
-        echo "
-        <div class='music-card w-full'>
-            <div class='music-img h-[500px] lg:h-[250px] relative group'>
-                <div class='overlay-play absolute top-0 left-0 hidden group-hover:flex items-center bg-gray-950/70 justify-center w-full h-full'>
-                    <button onclick=\"window.location.href = './routes/music.php?music_id=$music_id'\" class='bg-transparent outline-none'>
-                        <svg xmlns='http://www.w3.org/2000/svg' class='size-28 rounded-full transtion duration-300 cursor-pointer hover:text-red-500' viewBox='0 0 24 24' fill='currentColor'>
-                            <path d='M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM10.6219 8.41459C10.5562 8.37078 10.479 8.34741 10.4 8.34741C10.1791 8.34741 10 8.52649 10 8.74741V15.2526C10 15.3316 10.0234 15.4088 10.0672 15.4745C10.1897 15.6583 10.4381 15.708 10.6219 15.5854L15.5008 12.3328C15.5447 12.3035 15.5824 12.2658 15.6117 12.2219C15.7343 12.0381 15.6846 11.7897 15.5008 11.6672L10.6219 8.41459Z'></path>
-                        </svg>
-                    </button>
+    <?php
+    $query = "SELECT music_id, title, year, cover_image, is_new, artist_id FROM music ORDER BY created_at DESC LIMIT 5";
+    
+    $result = mysqli_query($conn, $query);
+    
+    if ($result) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $music_id = $row['music_id'];
+            $title = $row['title'];
+            $year = $row['year'];
+            $is_new = $row['is_new'];
+            $cover_image = $row['cover_image'];
+            $artist_id = $row['artist_id'];
+        
+            $artist_query = "SELECT name FROM artists WHERE artist_id = $artist_id";
+            $artist_result = mysqli_query($conn, $artist_query);
+            $artist = mysqli_fetch_assoc($artist_result)['name'];
+        
+            echo "
+            <div class='music-card w-full'>
+                <div class='music-img h-[500px] lg:h-[250px] relative group rounded-xl overflow-hidden '>
+                    <div class='overlay-play absolute top-0 left-0 hidden group-hover:flex items-center bg-gray-950/70 justify-center w-full h-full'>
+                        <button onclick=\"window.location.href = './routes/music.php?music_id=$music_id'\" class='bg-transparent outline-none'>
+                            <svg xmlns='http://www.w3.org/2000/svg' class='size-28 rounded-full transtion duration-300 cursor-pointer hover:text-red-500' viewBox='0 0 24 24' fill='currentColor'>
+                                <path d='M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM10.6219 8.41459C10.5562 8.37078 10.479 8.34741 10.4 8.34741C10.1791 8.34741 10 8.52649 10 8.74741V15.2526C10 15.3316 10.0234 15.4088 10.0672 15.4745C10.1897 15.6583 10.4381 15.708 10.6219 15.5854L15.5008 12.3328C15.5447 12.3035 15.5824 12.2658 15.6117 12.2219C15.7343 12.0381 15.6846 11.7897 15.5008 11.6672L10.6219 8.41459Z'></path>
+                            </svg>
+                        </button>
+                    </div>
+                    ". ($is_new ? "<span class='release-year absolute top-2 right-2 py-1 px-2 rounded-md bg-green-700 text-white text-xs'>NEW</span>" : "") ."
+                    <span class='release-year absolute top-2 left-2 py-1 px-2 rounded-md bg-black text-white text-xs'>$year</span>
+                    <img src='.$cover_image' class='w-full h-full object-cover' alt='music-img'>
                 </div>
-                <span class='release-year absolute top-2 right-2 py-1 px-2 rounded-md bg-black text-white text-xs'>$year</span>
-                <img src='.$cover_image' class='w-full h-full object-cover' alt='music-img'>
-            </div>
-            <div class='music-body w-full p-2'>
-                <p class='truncate overflow-hidden'>$title</p>
-                <p class='song-artist text-xs text-gray-300'><b>Artist:</b> $artist</p>
-            </div>
-        </div>";
+                <div class='music-body w-full p-2'>
+                    <p class='truncate overflow-hidden'>$title</p>
+                    <p class='song-artist text-xs text-gray-300'><b>Artist:</b> $artist</p>
+                </div>
+            </div>";
+        }
+    } else {
+        echo "Error fetching data: " . mysqli_error($conn);
     }
-} else {
-    echo "Error fetching data: " . mysqli_error($conn);
-}
-?>
+    ?>
 
         <!-- Music Card 1 -->
         <!-- <div class="music-card w-full ">
@@ -204,17 +206,14 @@ if ($result) {
 
     include_once('./includes/footer.php');
     
-    ?>
+?>
 
 
 <script>
 $(document).ready(function() {
     $('#dropdown-button').click(function() {
         $('#dropdown').toggleClass('hidden');
-
     });
-
-
 });
 </script>
 </body>

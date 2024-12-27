@@ -130,22 +130,22 @@ if (ROUTE === "index") {
                         <div class="music-cata-container flex flex-col py-2 pt-4 px-4">
                             <h1 class=" border-b py-2">Music</h1>
                             <div class="music-cata flex my-2">
-                                <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=Album&type=music' : './categories.php?filter=album'; ?>"
+                                <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=Album&type=music' : './categories.php?filter=album&type=music'; ?>"
                                     class="text-sm flex py-2 px-4 mx-1 min-w-28 truncate rounded-md bg-[#2E236C] transition duration-300 hover:bg-[#17153B] border border-transparent hover:border-gray-200">Album</a>
-                                <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=Artist&type=music' : './categories.php?filter=artist'; ?>"
+                                <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=Artist&type=music' : './categories.php?filter=artist&type=music'; ?>"
                                     class="text-sm flex py-2 px-4 mx-1 min-w-28 truncate rounded-md bg-[#2E236C] transition duration-300 hover:bg-[#17153B] border border-transparent hover:border-gray-200">Artist</a>
-                                <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=Year&type=music' : './categories.php?filter=year'; ?>"
+                                <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=Year&type=music' : './categories.php?filter=year&type=music'; ?>"
                                     class="text-sm flex py-2 px-4 mx-1 min-w-28 truncate rounded-md bg-[#2E236C] transition duration-300 hover:bg-[#17153B] border border-transparent hover:border-gray-200">Year</a>
                             </div>
                         </div>
                         <div class="movie-cata-container flex flex-col py-2 px-4">
                             <h1 class=" border-b py-2">Movie</h1>
                             <div class="movie-cata flex my-2">
-                                <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=Year&type=video' : './categories.php?filter=year'; ?>"
+                                <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=Year&type=video' : './categories.php?filter=year&type=video'; ?>"
                                     class="text-sm flex py-2 px-4 mx-1 min-w-28 truncate rounded-md bg-[#2E236C] transition duration-300 hover:bg-[#17153B] border border-transparent hover:border-gray-200">Year</a>
-                                <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=Genre&type=video' : './categories.php?filter=genre'; ?>"
+                                <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=Genre&type=video' : './categories.php?filter=genre&type=video'; ?>"
                                     class="text-sm flex py-2 px-4 mx-1 min-w-28 truncate rounded-md bg-[#2E236C] transition duration-300 hover:bg-[#17153B] border border-transparent hover:border-gray-200">Genre</a>
-                                <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=Language&type=video' : './categories.php?filter=language'; ?>"
+                                <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=Language&type=video' : './categories.php?filter=language&type=video'; ?>"
                                     class="text-sm flex py-2 px-4 mx-1 min-w-28 truncate rounded-md bg-[#2E236C] transition duration-300 hover:bg-[#17153B] border border-transparent hover:border-gray-200">Language</a>
 
                             </div>
@@ -154,23 +154,28 @@ if (ROUTE === "index") {
                 </div>
             </div>
 
-            <label for="search-bar"
-                class="hidden md:flex items-center border border-gray-500 cursor-text pl-3 bg-[#17153B] text-white rounded">
-                <input type="text" placeholder="Search music or videos..." id="search-bar"
-                    class="text-xs text-gray-300 w-44 bg-transparent outline-none border-none">
-                <button class=" text-sm text-gray-400 size-9 p-2 rounded">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-full h-full" viewBox="0 0 24 24"
-                        fill="currentColor">
-                        <path
-                            d="M11 2C15.968 2 20 6.032 20 11C20 15.968 15.968 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2ZM11 18C14.8675 18 18 14.8675 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18ZM19.4853 18.0711L22.3137 20.8995L20.8995 22.3137L18.0711 19.4853L19.4853 18.0711Z">
-                        </path>
-                    </svg>
-                </button>
-            </label>
+            <div class="search-container relative">
+                <label for="search-bar"
+                    class="hidden md:flex items-center border border-gray-500 cursor-text pl-3 bg-[#17153B] text-white rounded">
+                    <input type="text" placeholder="Search music or videos..." id="search-bar"
+                        class="text-xs text-gray-300 w-48 bg-transparent outline-none border-none">
+                    <button class=" text-sm text-gray-400 size-9 p-2 rounded">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-full h-full" viewBox="0 0 24 24"
+                            fill="currentColor">
+                            <path
+                                d="M11 2C15.968 2 20 6.032 20 11C20 15.968 15.968 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2ZM11 18C14.8675 18 18 14.8675 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18ZM19.4853 18.0711L22.3137 20.8995L20.8995 22.3137L18.0711 19.4853L19.4853 18.0711Z">
+                            </path>
+                        </svg>
+                    </button>
+                </label>
+                <div
+                    class="search-list z-50 absolute top-full max-h-[300px] overflow-y-auto w-full bg-[#17153B] flex flex-col gap-1 p-2 hidden">
+                </div>
+            </div>
 
             <div class="flex space-x-2 items-center">
                 <?php 
-                if (isset($_SESSION['user_id']) && isset($_SESSION['user_email']) && isset($_SESSION['user_name'])) {
+                    if (isset($_SESSION['user_id']) && isset($_SESSION['user_email']) && isset($_SESSION['user_name']) && isset($_SESSION['user_address']) && isset($_SESSION['user_phone']) && isset($_SESSION['user_role'])) {
                 ?>
                 <span class="text-sm">Welcome, <?= $_SESSION['user_name']; ?></span>
                 <div class="relative group">
@@ -185,9 +190,14 @@ if (ROUTE === "index") {
                     </button>
                     <div id="dropdown"
                         class="absolute right-0 p-2 py-2 text-sm hidden bg-[#17153B] text-white rounded rounded-r-none shadow-lg dropdown-menu group-hover:block z-10">
+                        <a href="<?= (ROUTE === "index") ? './admin/' : '../admin/' ?>"
+                            class="block truncate px-8 py-2 hover:bg-[#2E236C]">Admin Panel</a>
                         <button id="show-profile" class="block truncate px-8 py-2 hover:bg-[#2E236C]">My
                             Account</button>
-                        <a href="<?= (ROUTE === "index") ? './routes/logout.php' : '../routes/logout.php' ?>" class="block truncate px-8 py-2 hover:bg-[#2E236C]">Logout</a>
+                        <a href="<?= (ROUTE === "index") ? './routes/favorites.php' : './favorites.php' ?>"
+                            class="block truncate px-8 py-2 hover:bg-[#2E236C]">Favorites</a>
+                        <a href="<?= (ROUTE === "index") ? './routes/logout.php' : './logout.php' ?>"
+                            class="block truncate px-8 py-2 hover:bg-[#2E236C]">Logout</a>
                     </div>
                 </div>
                 <?php 
@@ -202,7 +212,7 @@ if (ROUTE === "index") {
                 ?>
             </div>
             <?php 
-                if (isset($_SESSION['user_id']) && isset($_SESSION['user_email']) && isset($_SESSION['user_name'])) {
+                if (isset($_SESSION['user_id']) && isset($_SESSION['user_email']) && isset($_SESSION['user_name']) && isset($_SESSION['user_address']) && isset($_SESSION['user_phone']) && isset($_SESSION['user_role'])) {
             ?>
             <div id="profile-container"
                 class="user-profile absolute hidden z-50 bg-gray-500/30 w-screen h-screen top-0 left-0 flex flex-col items-center justify-center">

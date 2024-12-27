@@ -48,6 +48,69 @@ $('#close-profile').on('click', function() {
     $('#profile-container').fadeOut(300);
     $('body').css('overflow', 'auto');
 });
+// Search functionlity 
+$(document).ready(function() {
+
+    function debounce(func, delay) {
+        let debounceTimer;
+        return function(...args) {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => func.apply(this, args), delay);
+        };
+    }
+
+    function searchMusic(query) {
+        if (query.trim() === "") {
+            $(".search-list").empty().hide();
+            return;
+        }
+
+        $.ajax({
+            url: "<?= (ROUTE === 'index') ? './controller/search_music.controller.php' : '../controller/search_music.controller.php' ?>",
+            type: "GET",
+            data: {
+                query: query
+            },
+            success: function(response) {
+                const {
+                    results
+                } = response;
+
+                $(".search-list").empty();
+
+                // genertate search results
+                if (results.length > 0) {
+                    results.forEach(result => {
+                        $(".search-list").append(`
+                            <div onclick="window.location.href='<?= (ROUTE === 'index') ? './routes/': './' ?>music.php?music_id=${result.music_id}'" class="search-result flex items-center gap-1 p-2 cursor-pointer hover:bg-gray-800">
+                                <img src="<?= (ROUTE === 'index') ? '.': '..'?>${result.cover_image}" class="object-fit size-12" alt="${result.title}">
+                                <div class="search-music-details flex flex-col overflow-hidden ml-2">
+                                    <h3 class="truncate text-sm my-0 text-gray-200">Song: ${result.title}</h3>
+                                    <span class="truncate text-xs text-gray-300">Artist: ${result.artist_name}</span>
+                                    <span class="truncate text-xs text-gray-300">Album: ${result.album_name}</span>
+                                </div>
+                            </div>
+                        `);
+                    });
+                    $(".search-list").show();
+                } else {
+                    $(".search-list").append(
+                            `<div class="text-gray-300 p-2 text-sm text-center">No music or videos found</div>`)
+                        .show();
+                }
+            },
+            error: function() {
+                $(".search-list").empty().append(
+                    `<div class="text-red-500 p-2 text-sm text-center">Error fetching results</div>`).show();
+            }
+        });
+    }
+
+    $("#search-bar").on("input", debounce(function() {
+        const query = $(this).val();
+        searchMusic(query);
+    }, 300));
+});
 </script>
 <?php 
 }

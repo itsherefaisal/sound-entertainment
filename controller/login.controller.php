@@ -17,9 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     include_once('../config.php');
 
     if (filter_var($emailOrUsername, FILTER_VALIDATE_EMAIL)) {
-        $query = "SELECT user_id, username, email, address, phone_number, password FROM users WHERE email = ?";
+        $query = "SELECT user_id, username, email, address, phone_number, role, password FROM users WHERE email = ?";
     } else {
-        $query = "SELECT user_id, username, email, address, phone_number, password FROM users WHERE username = ?";
+        $query = "SELECT user_id, username, email, address, phone_number, role, password FROM users WHERE username = ?";
     }
 
     $stmt = $conn->prepare($query);
@@ -36,6 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user_email'] = $user['email'];
             $_SESSION['user_address'] = $user['address'];
             $_SESSION['user_phone'] = $user['phone_number'];
+            $_SESSION['user_role'] = $user['role'];
 
             echo json_encode(['success' => true]);
         } else {

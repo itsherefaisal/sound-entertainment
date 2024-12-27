@@ -11,7 +11,7 @@ $query = "
     SELECT m.music_id, m.title, m.year, m.language, m.cover_image AS music_cover, 
            a.name AS artist_name, a.image_url AS artist_image, al.name AS album_name, 
            al.cover_image AS album_cover, m.file_path,
-           al.album_id
+           al.album_id, m.description, m.is_new
     FROM music m
     JOIN albums al ON m.album_id = al.album_id
     JOIN artists a ON m.artist_id = a.artist_id
@@ -24,6 +24,8 @@ if ($result && mysqli_num_rows($result) > 0) {
     $music = mysqli_fetch_assoc($result);
     $title = $music['title'];
     $year = $music['year'];
+    $description = $music['description'];
+    $is_new = $music['is_new'];
     $language = $music['language'];
     $album_id = $music['album_id'];
     $artist_name = $music['artist_name'];
@@ -63,14 +65,26 @@ if ($result && mysqli_num_rows($result) > 0) {
                 <div class="text-sm opacity-60"><?= $artist_name?></div>
                 <div class="mt-8 text-gray-400">
                     <div class="flex items-center space-x-2 text-xs">
-                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
-                            <path
-                                d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z">
-                            </path>
-                        </svg>
-                        <span>Easy listening</span>
+                    <?php 
+                        if ($is_new) {
+                            echo "
+                                <div class='flex items-center gap-1 text-white'>
+                                    <svg xmlns='http://www.w3.org/2000/svg' class='size-4' viewBox='0 0 24 24' fill='currentColor'><path d='M17.6177 5.9681L19.0711 4.51472L20.4853 5.92893L19.0319 7.38231C20.2635 8.92199 21 10.875 21 13C21 17.9706 16.9706 22 12 22C7.02944 22 3 17.9706 3 13C3 8.02944 7.02944 4 12 4C14.125 4 16.078 4.73647 17.6177 5.9681ZM12 20C15.866 20 19 16.866 19 13C19 9.13401 15.866 6 12 6C8.13401 6 5 9.13401 5 13C5 16.866 8.13401 20 12 20ZM11 8H13V14H11V8ZM8 1H16V3H8V1Z'></path></svg>
+                                    <span>NEW</span>
+                                </div>
+                            "; 
+                        }
+                        ?>
+                        
+                        <div class="flex items-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM9.71002 19.6674C8.74743 17.6259 8.15732 15.3742 8.02731 13H4.06189C4.458 16.1765 6.71639 18.7747 9.71002 19.6674ZM10.0307 13C10.1811 15.4388 10.8778 17.7297 12 19.752C13.1222 17.7297 13.8189 15.4388 13.9693 13H10.0307ZM19.9381 13H15.9727C15.8427 15.3742 15.2526 17.6259 14.29 19.6674C17.2836 18.7747 19.542 16.1765 19.9381 13ZM4.06189 11H8.02731C8.15732 8.62577 8.74743 6.37407 9.71002 4.33256C6.71639 5.22533 4.458 7.8235 4.06189 11ZM10.0307 11H13.9693C13.8189 8.56122 13.1222 6.27025 12 4.24799C10.8778 6.27025 10.1811 8.56122 10.0307 11ZM14.29 4.33256C15.2526 6.37407 15.8427 8.62577 15.9727 11H19.9381C19.542 7.8235 17.2836 5.22533 14.29 4.33256Z"></path></svg>
+                        <span><?= $language?></span>
+                        </div>
+                        <div class="flex items-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12.5858L16.2426 16.8284L14.8284 18.2426L13 16.415V22H11V16.413L9.17157 18.2426L7.75736 16.8284L12 12.5858ZM12 2C15.5934 2 18.5544 4.70761 18.9541 8.19395C21.2858 8.83154 23 10.9656 23 13.5C23 16.3688 20.8036 18.7246 18.0006 18.9776L18.0009 16.9644C19.6966 16.7214 21 15.2629 21 13.5C21 11.567 19.433 10 17.5 10C17.2912 10 17.0867 10.0183 16.8887 10.054C16.9616 9.7142 17 9.36158 17 9C17 6.23858 14.7614 4 12 4C9.23858 4 7 6.23858 7 9C7 9.36158 7.03838 9.7142 7.11205 10.0533C6.91331 10.0183 6.70879 10 6.5 10C4.567 10 3 11.567 3 13.5C3 15.2003 4.21241 16.6174 5.81986 16.934L6.00005 16.9646L6.00039 18.9776C3.19696 18.7252 1 16.3692 1 13.5C1 10.9656 2.71424 8.83154 5.04648 8.19411C5.44561 4.70761 8.40661 2 12 2Z"></path></svg>
+                        <span><?= $year?></span>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -110,7 +124,7 @@ if ($result && mysqli_num_rows($result) > 0) {
                 </div>
                 <div id="total-duration">0:00</div>
             </div>
-            <div class="flex items-center space-x-2 px-4 w-2/4 pb-4">
+            <div class="flex items-center space-x-2 px-4 w-2/5 -mt-10">
                 <div id="volume-icon" class="w-6 h-6 text-[#C8ACD6]">
                 </div>
                 <div id="volume-bar" class="relative h-1 bg-[#C8ACD6] flex-grow cursor-pointer">
@@ -119,7 +133,14 @@ if ($result && mysqli_num_rows($result) > 0) {
                     </div>
                 </div>
             </div>
-
+            <div class="description  py-4 px-3">
+                <span class="text-xs text-gray-300">
+                    Description
+                </span>
+                <p class="text-sm text-gray-200">
+                    <?= $description; ?>
+                </p>
+            </div>
             <audio id="audio" src="..<?= $file_path?>"></audio>
         </div>
 
