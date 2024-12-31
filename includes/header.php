@@ -31,6 +31,33 @@ if (ROUTE === "index") {
         box-shadow: none !important;
         transition: background-color 5000s ease-in-out 0s, -webkit-text-fill-color 5000s ease-in-out 0s;
     }
+
+    .search-overlay {
+        overflow: hidden;
+    }
+
+    #searchBox {
+        width: 90%;
+        max-width: 500px;
+        border-radius: 0.5rem;
+        transform: translateY(50%);
+        opacity: 0;
+        transition: transform 100ms ease-out, opacity 300ms ease-out;
+    }
+
+    #searchBox.show {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    @media (max-width: 500px) {
+        #searchBox {
+            width: 100%;
+            height: 100vh;
+            margin: 0;
+            border-radius: 0;
+        }
+    }
     </style>
 
     <?= (ROUTE === 'index') ? '
@@ -154,7 +181,7 @@ if (ROUTE === "index") {
                 </div>
             </div>
 
-            <div class="search-container relative">
+            <!-- <div class="search-container relative">
                 <label for="search-bar"
                     class="hidden md:flex items-center border border-gray-500 cursor-text pl-3 bg-[#17153B] text-white rounded">
                     <input type="text" placeholder="Search music or videos..." id="search-bar"
@@ -170,6 +197,36 @@ if (ROUTE === "index") {
                 </label>
                 <div
                     class="search-list z-50 absolute top-full max-h-[300px] overflow-y-auto w-full bg-[#17153B] flex flex-col gap-1 p-2 hidden">
+                </div>
+            </div> -->
+            <button id="searchBtn" class="bg-[#687EFF] transition duration-200 hover:bg-[#80B3FF] text-white p-3 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-5 stroke-2" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M11 2C15.968 2 20 6.032 20 11C20 15.968 15.968 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2ZM11 18C14.8675 18 18 14.8675 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18ZM19.4853 18.0711L22.3137 20.8995L20.8995 22.3137L18.0711 19.4853L19.4853 18.0711Z">
+                    </path>
+                </svg>
+            </button>
+            <div id="searchContainer"
+                class="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center hidden">
+                <div id="searchBox"
+                    class="bg-[#1A1A2E] rounded-lg pb-6 shadow-lg overflow-hidden text-[#ffff] h-[400px]">
+                    <label for="searchInput"
+                        class="relative flex justify-between items-center mb-2 pl-6 pr-20 px-2 group">
+                        <input type="text" id="searchInput" name="searchInput" placeholder="Type here to Search..."
+                            class="placeholder:text-[#BCCCDC] pt-5 pb-4 pl-4 w-full border-b border-gray-600 transition-focus duration-300 focus:border-gray-200 bg-transparent outline-none"
+                            autocomplete="off" />
+                        <button id="closeBtn"
+                            class="absolute right-5 top-4 my-auto p-1 border-2 border-transparent rounded-full transition duration-200 text-gray-400 hover:border-[#C62300] hover:text-[#D9EAFD] hover:bg-[#C62300]">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="size-7" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="feather feather-x">
+                                <line x1="18" y1="6" x2="6" y2="18" />
+                                <line x1="6" y1="6" x2="18" y2="18" />
+                            </svg>
+                        </button>
+                    </label>
+                    <div class="search_result_container w-full py-4 px-6 flex flex-col gap-2 overflow-y-auto  flex-grow max-h-[calc(100%-43px)]">
+                    </div>
                 </div>
             </div>
 

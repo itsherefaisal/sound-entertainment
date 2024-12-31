@@ -51,6 +51,35 @@ $('#close-profile').on('click', function() {
 
 // Search functionlity 
 $(document).ready(function() {
+    const searchBtn = document.getElementById('searchBtn');
+    const searchContainer = document.getElementById('searchContainer');
+    const searchBox = document.getElementById('searchBox');
+    const searchContainerCloseBtn = document.getElementById('closeBtn');
+    const body = document.body;
+
+    const toggleSearchContainer = (isVisible) => {
+        const method = isVisible ? 'remove' : 'add';
+        searchContainer.classList[method]('hidden');
+        body.classList[isVisible ? 'add' : 'remove']('search-overlay');
+
+        if (isVisible) {
+            setTimeout(() => {
+                searchBox.classList.add('show');
+            }, 10);
+        } else {
+            searchBox.classList.remove('show');
+        }
+    };
+
+    searchBtn.addEventListener('click', () => toggleSearchContainer(true));
+    searchContainerCloseBtn.addEventListener('click', () => toggleSearchContainer(false));
+    document.addEventListener('click', (event) => {
+        if (!searchContainer.classList.contains('hidden') && !searchBox.contains(event.target) && !
+            searchBtn.contains(event.target)) {
+            toggleSearchContainer(false);
+        }
+    });
+
     function debounce(func, delay) {
         let debounceTimer;
         return function(...args) {
@@ -61,7 +90,7 @@ $(document).ready(function() {
 
     function searchContent(query) {
         if (query.trim() === "") {
-            $(".search-list").empty().hide();
+            $(".search_result_container").empty().hide();
             return;
         }
 
@@ -77,67 +106,103 @@ $(document).ready(function() {
                     videos
                 } = response;
 
-                $(".search-list").empty();
+                $(".search_result_container").empty();
 
                 if (music.length > 0) {
-                    $(".search-list").append(
-                        '<h4 class="text-gray-400 text-xs px-2">Music Results</h4>');
+                    $(".search_result_container").append(
+                        `<div class="search_result_music_container flex flex-col gap-1">  
+                            <h4 class="px-2 text-sm"> Songs </h4>`
+                    );
                     music.forEach((result) => {
-                        const detailUrl =
+                        const redirectUrl =
                             `<?= (ROUTE === 'index') ? './routes/' : './' ?>music.php?music_id=${result.id}`;
-                        $(".search-list").append(`
-                        <div onclick="window.location.href='${detailUrl}'" class="search-result flex items-center gap-1 p-2 cursor-pointer hover:bg-gray-800">
-                            <img src="<?= (ROUTE === 'index') ? './assets/media/images/' : '../assets/media/images/' ?>${result.cover_image}" class="object-fit size-12" alt="${result.title}">
-                            <div class="search-details flex flex-col overflow-hidden ml-2">
-                                <h3 class="truncate text-sm my-0 text-gray-200">Song: ${result.title}</h3>
-                                <span class="truncate text-xs text-gray-300">Artist: ${result.artist_name}</span>
-                                <span class="truncate text-xs text-gray-300">Album: ${result.album_name}</span>
-                            </div>
-                        </div>
-                    `);
+                        $(".search_result_music_container").append(`
+                                <div onclick="window.location.href='${redirectUrl}'" class="search_result border border-[#563A9C] transition duration-300 cursor-pointer hover:bg-[#563A9C] rounded-lg flex items-center p-2">
+                                    <img src="<?= (ROUTE === 'index') ? './assets/media/images/' : '../assets/media/images/' ?>${result.cover_image}" class="search_result_image size-20 rounded-xl object-cover" alt="${result.title}">
+                                    <div class="search_result_body mx-2 overflow-hidden w-full">
+                                        <div class="search_result_heading flex flex-col">
+                                            <div class="search_result_subhead flex items-center justify-between">
+                                                <p class="text-[8px] text-gray-200">TITLE</p>
+                                                <p class="text-xs font-bold text-[#FAEF5D]">SONG</p>
+                                            </div>
+                                            <h3 class="text-white text-sm pl-1 truncate">${result.title}</h3>
+                                        </div>
+                                        <div class="search_result_subheading flex flex-nowrap w-full items-end gap-1 mt-1 text-xs">
+                                            <div class="flex flex-col">
+                                                <span class="text-[10px] pl-2">Artist</span>
+                                                <span class="py-1 px-2 bg-[#49108B] text-xs rounded-xl truncate">${result.artist_name}</span>
+                                            </div>
+                                            <div class="flex flex-col">
+                                                <span class="text-[10px] pl-2">Album</span>
+                                                <span class="py-1 px-2 bg-[#49108B] text-xs rounded-xl truncate">${result.album_name}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `);
                     });
+                    $(".search_result_container").append('</div>');
                 }
 
+
                 if (videos.length > 0) {
-                    $(".search-list").append(
-                        '<h4 class="text-gray-400 text-xs px-2 mt-2">Video Results</h4>');
+                    $(".search_result_container").append(
+                        `<div class="search_result_video_container flex flex-col gap-1"> 
+                            <h4 class="px-2 text-sm">Videos</h4>`
+                    );
                     videos.forEach((result) => {
-                        const detailUrl =
+                        const redirectUrl =
                             `<?= (ROUTE === 'index') ? './routes/' : './' ?>video.php?video_id=${result.id}`;
-                        $(".search-list").append(`
-                        <div onclick="window.location.href='${detailUrl}'" class="search-result flex items-center gap-1 p-2 cursor-pointer hover:bg-gray-800">
-                            <img src="<?= (ROUTE === 'index') ? './assets/media/images/' : '../assets/media/images/' ?>${result.cover_image}" class="object-fit size-12" alt="${result.title}">
-                            <div class="search-details flex flex-col overflow-hidden ml-2">
-                                <h3 class="truncate text-sm my-0 text-gray-200">Video: ${result.title}</h3>
-                                <span class="truncate text-xs text-gray-300">Genre: ${result.genre_name}</span>
-                                <span class="truncate text-xs text-gray-300">Language: ${result.language}</span>
+                        $(".search_result_video_container").append(`
+                            <div onclick="window.location.href='${redirectUrl}'" class="search_result border border-[#563A9C] transition duration-300 cursor-pointer hover:bg-[#563A9C] rounded-lg flex items-center p-2">
+                                <img src="<?= (ROUTE === 'index') ? './assets/media/images/' : '../assets/media/images/' ?>${result.cover_image}" 
+                                    class="search_result_image size-20 rounded-xl object-cover" alt="${result.title}">
+                                <div class="search_result_body mx-2 overflow-hidden w-full">
+                                    <div class="search_result_heading flex flex-col">
+                                        <div class="search_result_subhead flex items-center justify-between">
+                                            <p class="text-[8px] text-gray-200">TITLE</p>
+                                            <p class="text-xs font-bold text-[#98E4FF]">VIDEO</p>
+                                        </div>
+                                        <h3 class="text-white text-sm pl-1 truncate">${result.title}</h3>
+                                    </div>
+                                    <div class="search_result_subheading flex flex-nowrap w-full items-end gap-1 mt-1 text-xs">
+                                        <div class="flex flex-col">
+                                            <span class="text-[10px] pl-2">Language</span>
+                                            <span class="py-1 px-2 bg-[#49108B] text-xs rounded-xl truncate">${result.language}</span>
+                                        </div>
+                                        <div class="flex flex-col">
+                                            <span class="text-[10px] pl-2">Genre</span>
+                                            <span class="py-1 px-2 bg-[#49108B] text-xs rounded-xl truncate">${result.genre_name}</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    `);
+                        `);
                     });
+                    $(".search_result_container").append('</div>');
                 }
 
                 if (music.length === 0 && videos.length === 0) {
-                    $(".search-list").append(
+                    $(".search_result_container").append(
                         `<div class="text-gray-300 p-2 text-sm text-center">No music or videos found</div>`
                     );
                 }
 
-                $(".search-list").show();
+                $(".search_result_container").show();
             },
             error: function() {
-                $(".search-list")
+                $(".search_result_container")
                     .empty()
                     .append(
                         `<div class="text-red-500 p-2 text-sm text-center">Error fetching results</div>`
-                        )
+                    )
                     .show();
             },
         });
     }
 
 
-    $("#search-bar").on(
+    $("#searchInput").on(
         "input",
         debounce(function() {
             const query = $(this).val();
