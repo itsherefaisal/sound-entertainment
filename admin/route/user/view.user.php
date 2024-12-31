@@ -38,7 +38,7 @@ $(document).ready(function() {
                     if (users.length < 1) {
                         rows = `
                             <tr>
-                                <td colspan="7" class="text-center border border-gray-600 px-4 py-2 text-sm text-gray-300">
+                                <td colspan="7" class="text-center border border-gray-600 px-4 py-8 text-sm text-gray-300">
                                     No users found.
                                 </td>
                             </tr>
@@ -53,9 +53,15 @@ $(document).ready(function() {
                                     <td class="border border-gray-600 px-4 py-2">${user.phone_number}</td>
                                     <td class="border border-gray-600 px-4 py-2">${user.address}</td>
                                     <td class="border border-gray-600 px-4 py-2">${user.role}</td>
-                                    <td class="border border-gray-600 px-4 py-2 text-center">
-                                        <button class="bg-blue-500 hover:bg-blue-700 text-white py-1 min-w-16 rounded">Edit</button>
-                                        <button class="bg-red-500 hover:bg-red-700 text-white py-1 min-w-16 rounded">Delete</button>
+                                    <td class="border border-gray-600 px-4 py-2 text-center flex items-center gap-2 justify-center">
+                                            <form method="POST" action="./modify.user.php" class="space-y-4">
+                                                <input type="hidden" name="user_id" value="${user.user_id}">
+                                                <button type="submit" class="transition duration-300 bg-[#433878] hover:bg-[#7E60BF] text-white py-1 min-w-16 rounded">Edit</button>
+                                            </form>
+                                            <form method="POST" action="./delete.user.php" class="space-y-4">
+                                                <input type="hidden" name="user_id" value="${user.user_id}">
+                                                <button type="submit" name="confirm_delete" class="transition duration-300 bg-[#C62E2E] hover:bg-[#F95454] text-white py-1 min-w-16 rounded">Delete</button>
+                                            </form>
                                     </td>
                                 </tr>
                             `;

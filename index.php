@@ -12,7 +12,7 @@ include_once("./includes/header.php");
 
     <div class="music-bottom my-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 lg:grid-cols-5 gap-6">
 
-    <?php
+        <?php
     $query = "SELECT music_id, title, year, cover_image, is_new, artist_id FROM music ORDER BY created_at DESC LIMIT 5";
     
     $result = mysqli_query($conn, $query);
@@ -42,7 +42,7 @@ include_once("./includes/header.php");
                     </div>
                     ". ($is_new ? "<span class='release-year absolute top-2 right-2 py-1 px-2 rounded-md bg-green-700 text-white text-xs'>NEW</span>" : "") ."
                     <span class='release-year absolute top-2 left-2 py-1 px-2 rounded-md bg-black text-white text-xs'>$year</span>
-                    <img src='.$cover_image' class='w-full h-full object-cover' alt='music-img'>
+                    <img src='./assets/media/images/$cover_image' class='w-full h-full object-cover' alt='music-img'>
                 </div>
                 <div class='music-body w-full p-2'>
                     <p class='truncate overflow-hidden'>$title</p>
@@ -88,8 +88,55 @@ include_once("./includes/header.php");
     </div>
 
     <div class="video-bottom my-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 lg:grid-cols-5 gap-6">
+        <?php
+            $query = "
+                SELECT 
+                    v.video_id, 
+                    v.title, 
+                    v.year, 
+                    v.cover_image, 
+                    v.language, 
+                    v.description, 
+                    g.name AS genre 
+                FROM videos v
+                JOIN genres g ON v.genre_id = g.genre_id
+                ORDER BY v.created_at DESC 
+                LIMIT 5
+            ";
+
+            $result = mysqli_query($conn, $query);
+
+            if ($result) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $video_id = $row['video_id'];
+                    $title = $row['title'];
+                    $year = $row['year'];
+                    $cover_image = $row['cover_image'];
+                    $language = $row['language'];
+                    $description = $row['description'];
+                    $genre = $row['genre'];
+                
+                    echo "
+                    <div onclick=\"window.location.href = './routes/video.php?video_id=$video_id'\" class='video-card w-full transition duration-200 hover:bg-gray-900 cursor-pointer rounded-md'>
+                        <div class='video-img h-[500px] lg:h-[300px] relative'>
+                            <span class='release-year absolute top-2 right-2 py-1 px-2 rounded-md bg-black text-white text-xs'>$year</span>
+                            <img src='./assets/media/images/$cover_image' class='w-full h-full object-cover' alt='video-img'>
+                        </div>
+                        <div class='video-body w-full p-2'>
+                            <p class='truncate overflow-hidden text-lg mt-2'>$title</p>
+                            <p class='overflow-hidden text-gray-200 text-xs mb-2'>$description</p>
+                            <p class='video-artist text-xs text-gray-300'><b>Genre:</b> $genre</p>
+                            <p class='video-artist text-xs text-gray-300'><b>Language:</b> $language</p>
+                        </div>
+                    </div>";
+                }
+            } else {
+                echo "Error fetching data: " . mysqli_error($conn);
+            }
+        ?>
+
         <!-- Video Card 1 -->
-        <div onclick="window.location.href = './routes/video.php'"
+        <!-- <div onclick="window.location.href = './routes/video.php'"
             class="video-card w-full transition duration-200 hover:bg-gray-900 cursor-pointer rounded-md">
             <div class="video-img h-[500px] lg:h-[300px] relative">
                 <span
@@ -105,78 +152,17 @@ include_once("./includes/header.php");
                 <p class="video-artist text-xs text-gray-300"><b>Genre:</b> Comedy, Action</p>
                 <p class="video-artist text-xs text-gray-300"><b>Language:</b> English, Hindi</p>
             </div>
-        </div>
-        <!-- Video Card 2 -->
-        <div onclick="window.location.href = './routes/video.php'"
-            class="video-card w-full transition duration-200 hover:bg-gray-900 cursor-pointer rounded-md">
-            <div class="video-img h-[500px] lg:h-[300px] relative">
-                <span
-                    class="release-year absolute top-2 right-2 py-1 px-2 rounded-md bg-black text-white text-xs">2021</span>
-                <img src="./assets/images/video-card-2.jpg" class="w-full h-full object-cover" alt="music-img">
-            </div>
-            <div class="video-body w-full p-2">
-                <p class="truncate overflow-hidden text-lg mt-2">The Matrix Resurrections</p>
-                <p class="overflow-hidden text-gray-200 text-xs mb-2">Plagued by strange memories, Neo's life takes
-                    an unexpected turn when he finds himself back inside the Matrix.
-                </p>
-                <p class="video-artist text-xs text-gray-300"><b>Genre:</b> Sci-Fi, Action</p>
-                <p class="video-artist text-xs text-gray-300"><b>Language:</b> English</p>
-            </div>
-        </div>
-        <!-- Video Card 3 -->
-        <div onclick="window.location.href = './routes/video.php'"
-            class="video-card w-full transition duration-200 hover:bg-gray-900 cursor-pointer rounded-md">
-            <div class="video-img h-[500px] lg:h-[300px] relative">
-                <span
-                    class="release-year absolute top-2 right-2 py-1 px-2 rounded-md bg-black text-white text-xs">2022</span>
-                <img src="./assets/images/video-card-3.jpg" class="w-full h-full object-cover" alt="music-img">
-            </div>
-            <div class="video-body w-full p-2">
-                <p class="truncate overflow-hidden text-lg mt-2">Spider-Man: No Way Home</p>
-                <p class="overflow-hidden text-gray-200 text-xs mb-2">Peter Parker asks Doctor Strange for help to
-                    make everyone forget he's Spider-Man, only for the spell to go horribly wrong.
-                </p>
-                <p class="video-artist text-xs text-gray-300"><b>Genre:</b> Superhero, Action</p>
-                <p class="video-artist text-xs text-gray-300"><b>Language:</b> English</p>
-            </div>
-        </div>
-        <!-- Video Card 4 -->
-        <div onclick="window.location.href = './routes/video.php'"
-            class="video-card w-full transition duration-200 hover:bg-gray-900 cursor-pointer rounded-md">
-            <div class="video-img h-[500px] lg:h-[300px] relative">
-                <span
-                    class="release-year absolute top-2 right-2 py-1 px-2 rounded-md bg-black text-white text-xs">2020</span>
-                <img src="./assets/images/video-card-4.jpg" class="w-full h-full object-cover" alt="music-img">
-            </div>
-            <div class="video-body w-full p-2">
-                <p class="truncate overflow-hidden text-lg mt-2">Tenet</p>
-                <p class="overflow-hidden text-gray-200 text-xs mb-2">Armed with only one word, Tenet, a protagonist
-                    must fight for the survival of the world by bending the rules of time.
-                </p>
-                <p class="video-artist text-xs text-gray-300"><b>Genre:</b> Sci-Fi, Thriller</p>
-                <p class="video-artist text-xs text-gray-300"><b>Language:</b> English</p>
-            </div>
-        </div>
-        <!-- Video Card 5 -->
-        <div onclick="window.location.href = './routes/video.php'"
-            class="video-card w-full transition duration-200 hover:bg-gray-900 cursor-pointer rounded-md">
-            <div class="video-img h-[500px] lg:h-[300px] relative">
-                <span
-                    class="release-year absolute top-2 right-2 py-1 px-2 rounded-md bg-black text-white text-xs">2019</span>
-                <img src="./assets/images/video-card-5.jpg" class="w-full h-full object-cover" alt="music-img">
-            </div>
-            <div class="video-body w-full p-2">
-                <p class="truncate overflow-hidden text-lg mt-2">Joker</p>
-                <p class="overflow-hidden text-gray-200 text-xs mb-2">Arthur Fleck, a mentally troubled comedian,
-                    spirals into insanity and becomes the infamous Joker.
-                </p>
-                <p class="video-artist text-xs text-gray-300"><b>Genre:</b> Drama, Crime</p>
-                <p class="video-artist text-xs text-gray-300"><b>Language:</b> English</p>
-            </div>
-        </div>
+        </div> -->
     </div>
 
 </section>
+<?php 
+
+if (isset($_SESSION['user_id']) && isset($_SESSION['user_email']) && isset($_SESSION['user_name']) && isset($_SESSION['user_address']) && isset($_SESSION['user_phone']) && isset($_SESSION['user_role'])) {
+    echo " ";
+} else {
+
+?>
 <section class="overflow-hidden mx-8 bg-cover bg-bottom bg-no-repeat"
     style="background-image: url('./assets/images/music-stage-2.jpg');">
     <div class="bg-black/50 p-8 md:p-12 lg:px-16 lg:py-28">
@@ -199,7 +185,9 @@ include_once("./includes/header.php");
         </div>
     </div>
 </section>
-
+<?php 
+}
+?>
 
 
 <?php

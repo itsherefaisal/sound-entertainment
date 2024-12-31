@@ -130,22 +130,22 @@ if (ROUTE === "index") {
                         <div class="music-cata-container flex flex-col py-2 pt-4 px-4">
                             <h1 class=" border-b py-2">Music</h1>
                             <div class="music-cata flex my-2">
-                                <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=Album&type=music' : './categories.php?filter=album&type=music'; ?>"
+                                <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=album&type=music' : './categories.php?filter=album&type=music'; ?>"
                                     class="text-sm flex py-2 px-4 mx-1 min-w-28 truncate rounded-md bg-[#2E236C] transition duration-300 hover:bg-[#17153B] border border-transparent hover:border-gray-200">Album</a>
-                                <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=Artist&type=music' : './categories.php?filter=artist&type=music'; ?>"
+                                <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=artist&type=music' : './categories.php?filter=artist&type=music'; ?>"
                                     class="text-sm flex py-2 px-4 mx-1 min-w-28 truncate rounded-md bg-[#2E236C] transition duration-300 hover:bg-[#17153B] border border-transparent hover:border-gray-200">Artist</a>
-                                <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=Year&type=music' : './categories.php?filter=year&type=music'; ?>"
+                                <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=year&type=music' : './categories.php?filter=year&type=music'; ?>"
                                     class="text-sm flex py-2 px-4 mx-1 min-w-28 truncate rounded-md bg-[#2E236C] transition duration-300 hover:bg-[#17153B] border border-transparent hover:border-gray-200">Year</a>
                             </div>
                         </div>
                         <div class="movie-cata-container flex flex-col py-2 px-4">
                             <h1 class=" border-b py-2">Movie</h1>
                             <div class="movie-cata flex my-2">
-                                <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=Year&type=video' : './categories.php?filter=year&type=video'; ?>"
+                                <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=year&type=video' : './categories.php?filter=year&type=video'; ?>"
                                     class="text-sm flex py-2 px-4 mx-1 min-w-28 truncate rounded-md bg-[#2E236C] transition duration-300 hover:bg-[#17153B] border border-transparent hover:border-gray-200">Year</a>
-                                <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=Genre&type=video' : './categories.php?filter=genre&type=video'; ?>"
+                                <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=genre&type=video' : './categories.php?filter=genre&type=video'; ?>"
                                     class="text-sm flex py-2 px-4 mx-1 min-w-28 truncate rounded-md bg-[#2E236C] transition duration-300 hover:bg-[#17153B] border border-transparent hover:border-gray-200">Genre</a>
-                                <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=Language&type=video' : './categories.php?filter=language&type=video'; ?>"
+                                <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=language&type=video' : './categories.php?filter=language&type=video'; ?>"
                                     class="text-sm flex py-2 px-4 mx-1 min-w-28 truncate rounded-md bg-[#2E236C] transition duration-300 hover:bg-[#17153B] border border-transparent hover:border-gray-200">Language</a>
 
                             </div>
@@ -158,8 +158,8 @@ if (ROUTE === "index") {
                 <label for="search-bar"
                     class="hidden md:flex items-center border border-gray-500 cursor-text pl-3 bg-[#17153B] text-white rounded">
                     <input type="text" placeholder="Search music or videos..." id="search-bar"
-                        class="text-xs text-gray-300 w-48 bg-transparent outline-none border-none">
-                    <button class=" text-sm text-gray-400 size-9 p-2 rounded">
+                        class="text-xs text-gray-300 w-48 bg-transparent outline-none border-none" />
+                    <button class="text-sm text-gray-400 size-9 p-2 rounded">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-full h-full" viewBox="0 0 24 24"
                             fill="currentColor">
                             <path
@@ -172,6 +172,7 @@ if (ROUTE === "index") {
                     class="search-list z-50 absolute top-full max-h-[300px] overflow-y-auto w-full bg-[#17153B] flex flex-col gap-1 p-2 hidden">
                 </div>
             </div>
+
 
             <div class="flex space-x-2 items-center">
                 <?php 
@@ -190,12 +191,15 @@ if (ROUTE === "index") {
                     </button>
                     <div id="dropdown"
                         class="absolute right-0 p-2 py-2 text-sm hidden bg-[#17153B] text-white rounded rounded-r-none shadow-lg dropdown-menu group-hover:block z-10">
+
+                        <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === "ADMIN"): ?>
                         <a href="<?= (ROUTE === "index") ? './admin/' : '../admin/' ?>"
                             class="block truncate px-8 py-2 hover:bg-[#2E236C]">Admin Panel</a>
+                        <?php endif; ?>
                         <button id="show-profile" class="block truncate px-8 py-2 hover:bg-[#2E236C]">My
                             Account</button>
-                        <a href="<?= (ROUTE === "index") ? './routes/favorites.php' : './favorites.php' ?>"
-                            class="block truncate px-8 py-2 hover:bg-[#2E236C]">Favorites</a>
+                        <!-- <a href="<?= (ROUTE === "index") ? './routes/favorites.php' : './favorites.php' ?>"
+                            class="block truncate px-8 py-2 hover:bg-[#2E236C]">Favorites</a> -->
                         <a href="<?= (ROUTE === "index") ? './routes/logout.php' : './logout.php' ?>"
                             class="block truncate px-8 py-2 hover:bg-[#2E236C]">Logout</a>
                     </div>
@@ -291,8 +295,8 @@ if (ROUTE === "index") {
                 <div class="bg-cover bg-top  flex items-center h-[540px] text-white py-24 px-10 object-fill"
                     style="background-image: url('.'./assets/images/video-1.jpg'.'); background-size: cover; background-repeat: no-repeat; background-position: center;">
                     <div class="md:w-1/2">
-                        <p class="font-bold text-sm uppercase">Movie</p>
-                        <p class="text-3xl font-bold">Watch your favorite movie</p>
+                        <p class="font-bold text-sm uppercase">Videos</p>
+                        <p class="text-3xl font-bold">Watch your favorite videos</p>
                         <p class="text-2xl mb-10 leading-none">free time enjoyment</p>
                     </div>
                 </div>

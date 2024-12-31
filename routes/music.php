@@ -6,7 +6,6 @@ include_once("../includes/header.php");
 if (isset($_GET['music_id']) && is_numeric($_GET['music_id'])) {
     $music_id = $_GET['music_id'];
 
-// Query to fetch music details, album details, and artist details
 $query = "
     SELECT m.music_id, m.title, m.year, m.language, m.cover_image AS music_cover, 
            a.name AS artist_name, a.image_url AS artist_image, al.name AS album_name, 
@@ -50,7 +49,7 @@ if ($result && mysqli_num_rows($result) > 0) {
 
     <div class="relative w-full h-36 bg-white rounded-lg shadow-lg overflow-hidde mb-12">
         <div class="absolute inset-0 rounded-lg overflow-hidden bg-red-200">
-            <img src="..<?= $music_cover?>" 
+            <img src="../assets/media/images/<?= $music_cover?>" 
                 alt="banner" class="w-full">
             <div class="absolute inset-0 backdrop backdrop-blur-10 bg-gradient-to-b from-transparent to-black">
 
@@ -58,7 +57,7 @@ if ($result && mysqli_num_rows($result) > 0) {
         </div>
         <div class="absolute flex space-x-6 transform translate-x-6 translate-y-8">
             <div class="w-36 h-36 rounded-lg shadow-lg overflow-hidden">
-                <img src="..<?= $artist_image?>" class="w-full h-full object-cover" alt="Artist">
+                <img src="../assets/media/images/<?= $artist_image?>" class="w-full h-full object-cover" alt="Artist">
             </div>
             <div class="text-white pt-12">
                 <h3 class="font-bold"><?= $album_name?></h3>
@@ -94,7 +93,7 @@ if ($result && mysqli_num_rows($result) > 0) {
     <div class="music-container w-full flex px-8">
         <div id="audio-player" class="w-full bg-[#17153B] rounded-lg shadow-lg overflow-hidden">
             <div class="relative">
-                <img src="..<?= $music_cover?>" class="object-cover w-full h-[300px]">
+                <img src="../assets/media/images/<?= $music_cover?>" class="object-cover w-full h-[300px]">
                 <div
                     class="absolute p-4 inset-0 flex flex-col justify-end bg-gradient-to-b from-transparent to-gray-900 text-white">
                     <h3 class="font-bold text-lg">Song: <?= $title?></h3>
@@ -141,7 +140,7 @@ if ($result && mysqli_num_rows($result) > 0) {
                     <?= $description; ?>
                 </p>
             </div>
-            <audio id="audio" src="..<?= $file_path?>"></audio>
+            <audio id="audio" src="../assets/media/songs/<?= $file_path?>"></audio>
         </div>
 
         <?php
