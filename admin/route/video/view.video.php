@@ -66,7 +66,7 @@ if ($result && $result->num_rows > 0) {
                         <button type="submit"
                             class="transition duration-300 bg-[#433878] hover:bg-[#7E60BF] text-white py-1 px-2 rounded">Edit</button>
                     </form>
-                    <form method="GET" action="./delete.video.php" class="inline-block">
+                    <form method="GET" action="./remove.video.php" class="inline-block">
                         <input type="hidden" name="video_id" value="<?= $movie['video_id']; ?>">
                         <button type="submit"
                             class="transition duration-300 bg-[#C62E2E] hover:bg-[#F95454] text-white py-1 px-2 rounded">Delete</button>

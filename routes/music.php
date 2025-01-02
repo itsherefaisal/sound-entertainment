@@ -49,8 +49,7 @@ if ($result && mysqli_num_rows($result) > 0) {
 
     <div class="relative w-full h-36 bg-white rounded-lg shadow-lg overflow-hidde mb-12">
         <div class="absolute inset-0 rounded-lg overflow-hidden bg-red-200">
-            <img src="../assets/media/images/<?= $music_cover?>" 
-                alt="banner" class="w-full">
+            <img src="../assets/media/images/<?= $music_cover?>" alt="banner" class="w-full">
             <div class="absolute inset-0 backdrop backdrop-blur-10 bg-gradient-to-b from-transparent to-black">
 
             </div>
@@ -64,7 +63,7 @@ if ($result && mysqli_num_rows($result) > 0) {
                 <div class="text-sm opacity-60"><?= $artist_name?></div>
                 <div class="mt-8 text-gray-400">
                     <div class="flex items-center space-x-2 text-xs">
-                    <?php 
+                        <?php 
                         if ($is_new) {
                             echo "
                                 <div class='flex items-center gap-1 text-white'>
@@ -74,14 +73,24 @@ if ($result && mysqli_num_rows($result) > 0) {
                             "; 
                         }
                         ?>
-                        
+
                         <div class="flex items-center gap-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM9.71002 19.6674C8.74743 17.6259 8.15732 15.3742 8.02731 13H4.06189C4.458 16.1765 6.71639 18.7747 9.71002 19.6674ZM10.0307 13C10.1811 15.4388 10.8778 17.7297 12 19.752C13.1222 17.7297 13.8189 15.4388 13.9693 13H10.0307ZM19.9381 13H15.9727C15.8427 15.3742 15.2526 17.6259 14.29 19.6674C17.2836 18.7747 19.542 16.1765 19.9381 13ZM4.06189 11H8.02731C8.15732 8.62577 8.74743 6.37407 9.71002 4.33256C6.71639 5.22533 4.458 7.8235 4.06189 11ZM10.0307 11H13.9693C13.8189 8.56122 13.1222 6.27025 12 4.24799C10.8778 6.27025 10.1811 8.56122 10.0307 11ZM14.29 4.33256C15.2526 6.37407 15.8427 8.62577 15.9727 11H19.9381C19.542 7.8235 17.2836 5.22533 14.29 4.33256Z"></path></svg>
-                        <span><?= $language?></span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 24 24"
+                                fill="currentColor">
+                                <path
+                                    d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM9.71002 19.6674C8.74743 17.6259 8.15732 15.3742 8.02731 13H4.06189C4.458 16.1765 6.71639 18.7747 9.71002 19.6674ZM10.0307 13C10.1811 15.4388 10.8778 17.7297 12 19.752C13.1222 17.7297 13.8189 15.4388 13.9693 13H10.0307ZM19.9381 13H15.9727C15.8427 15.3742 15.2526 17.6259 14.29 19.6674C17.2836 18.7747 19.542 16.1765 19.9381 13ZM4.06189 11H8.02731C8.15732 8.62577 8.74743 6.37407 9.71002 4.33256C6.71639 5.22533 4.458 7.8235 4.06189 11ZM10.0307 11H13.9693C13.8189 8.56122 13.1222 6.27025 12 4.24799C10.8778 6.27025 10.1811 8.56122 10.0307 11ZM14.29 4.33256C15.2526 6.37407 15.8427 8.62577 15.9727 11H19.9381C19.542 7.8235 17.2836 5.22533 14.29 4.33256Z">
+                                </path>
+                            </svg>
+                            <span><?= $language?></span>
                         </div>
                         <div class="flex items-center gap-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12.5858L16.2426 16.8284L14.8284 18.2426L13 16.415V22H11V16.413L9.17157 18.2426L7.75736 16.8284L12 12.5858ZM12 2C15.5934 2 18.5544 4.70761 18.9541 8.19395C21.2858 8.83154 23 10.9656 23 13.5C23 16.3688 20.8036 18.7246 18.0006 18.9776L18.0009 16.9644C19.6966 16.7214 21 15.2629 21 13.5C21 11.567 19.433 10 17.5 10C17.2912 10 17.0867 10.0183 16.8887 10.054C16.9616 9.7142 17 9.36158 17 9C17 6.23858 14.7614 4 12 4C9.23858 4 7 6.23858 7 9C7 9.36158 7.03838 9.7142 7.11205 10.0533C6.91331 10.0183 6.70879 10 6.5 10C4.567 10 3 11.567 3 13.5C3 15.2003 4.21241 16.6174 5.81986 16.934L6.00005 16.9646L6.00039 18.9776C3.19696 18.7252 1 16.3692 1 13.5C1 10.9656 2.71424 8.83154 5.04648 8.19411C5.44561 4.70761 8.40661 2 12 2Z"></path></svg>
-                        <span><?= $year?></span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 24 24"
+                                fill="currentColor">
+                                <path
+                                    d="M12 12.5858L16.2426 16.8284L14.8284 18.2426L13 16.415V22H11V16.413L9.17157 18.2426L7.75736 16.8284L12 12.5858ZM12 2C15.5934 2 18.5544 4.70761 18.9541 8.19395C21.2858 8.83154 23 10.9656 23 13.5C23 16.3688 20.8036 18.7246 18.0006 18.9776L18.0009 16.9644C19.6966 16.7214 21 15.2629 21 13.5C21 11.567 19.433 10 17.5 10C17.2912 10 17.0867 10.0183 16.8887 10.054C16.9616 9.7142 17 9.36158 17 9C17 6.23858 14.7614 4 12 4C9.23858 4 7 6.23858 7 9C7 9.36158 7.03838 9.7142 7.11205 10.0533C6.91331 10.0183 6.70879 10 6.5 10C4.567 10 3 11.567 3 13.5C3 15.2003 4.21241 16.6174 5.81986 16.934L6.00005 16.9646L6.00039 18.9776C3.19696 18.7252 1 16.3692 1 13.5C1 10.9656 2.71424 8.83154 5.04648 8.19411C5.44561 4.70761 8.40661 2 12 2Z">
+                                </path>
+                            </svg>
+                            <span><?= $year?></span>
                         </div>
 
                     </div>
@@ -141,83 +150,93 @@ if ($result && mysqli_num_rows($result) > 0) {
                 </p>
             </div>
             <audio id="audio" src="../assets/media/songs/<?= $file_path?>"></audio>
+
+            <div id="comments-section" class="w-full mx-auto p-6 mt-10 bg-transparent rounded-lg shadow-lg">
+                <h2 id="comments-header" class="text-xl font-semibold mb-4 text-gray-100 border-b py-2">Comments</h2>
+
+                <div id="add-comment-section" class="mb-6">
+                    <div id="message-area" class="my-2 mx-auto"></div>
+                    <textarea id="comment-input"
+                        class="w-full h-24 p-3 rounded-md bg-[#2A2553] text-gray-200 placeholder-gray-400 border border-gray-600 focus:ring-2 focus:ring-blue-500 outline-none resize-none"
+                        placeholder="Write your comment..."></textarea>
+                    <div class="flex items-center gap-2">
+                        <button id="post-comment-btn"
+                            class="ml-auto bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition">
+                            Comment
+                        </button>
+                    </div>
+                </div>
+
+
+                <div id="comments-list" class="space-y-6">
+                </div>
+
+                <div id="load-more-section" class="mt-4 text-center">
+                    <button id="load-more-btn"
+                        class="bg-blue-500 text-white text-sm py-2 px-2 rounded-md hover:bg-blue-600 transition">
+                        More Comments
+                    </button>
+                </div>
+
+            </div>
         </div>
 
         <?php
-$current_title = $title;
-
-$related_songs_query = "
-    SELECT m.music_id, m.title, m.year, m.language,
-           a.name AS artist_name
-    FROM music m
-    JOIN artists a ON m.artist_id = a.artist_id
-    WHERE (m.album_id = $album_id OR m.title LIKE '%$current_title%') 
-      AND m.music_id != $music_id
-    LIMIT 10
-";
-
-$related_songs_result = mysqli_query($conn, $related_songs_query);
-if ($related_songs_result && mysqli_num_rows($related_songs_result) > 0) {
-?>
-    <ul class="related-songs w-full text-xs sm:text-base px-8 divide-y space-y-3 cursor-default">
-    <h3 class="px-3">More related songs.</h3>
-<?php 
-
-while ($song = mysqli_fetch_assoc($related_songs_result)) {
-$song_id = $song['music_id'];
-$title = $song['title'];
-$artist_name = $song['artist_name'];
-$song_year = $song['year'];
-
-?>
-<li class="flex w-full bg-slate-200 px-2 py-2 rounded-xl text-black justify-between items-center space-x-3">
-    <button onclick="window.location.href = './music.php?music_id=<?= $song_id?>'" class="p-2 transition duration-300 rounded-xl hover:bg-[#17153B] group focus:outline-none">
-        <svg class="size-6 transition duration-300 group-hover:text-slate-200" viewBox="0 0 24 24"
-            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round">
-            <polygon points="5 3 19 12 5 21 5 3"></polygon>
-        </svg>
-    </button>
-    <div class="flex-1 text-gray-600">
-        <?= $artist_name ?> - <?= $title ?>
-    </div>
-    <div class="text-xs text-gray-400">
-    <?= $song_year?>
-    </div>
-</li>
-<?php
-}
-    echo '</ul>';
-} else {
-?>
-    <ul
-        class="related-songs w-full flex items-center justify-center text-xs sm:text-base px-8 divide-y space-y-3 cursor-default">
-        <h3 class="px-3 text-gray-400">No related songs found.</h3>
-    </ul>
-<?php
-}
-?>
-
-            <!-- <ul class="related songs w-full text-xs sm:text-base px-8 divide-y space-y-3 cursor-default">
-            <h3 class="px-3">More</h3>
+        $current_title = $title;
+                            
+        $related_songs_query = "
+            SELECT m.music_id, m.title, m.year, m.language,
+                   a.name AS artist_name
+            FROM music m
+            JOIN artists a ON m.artist_id = a.artist_id
+            WHERE (m.album_id = $album_id OR m.title LIKE '%$current_title%') 
+              AND m.music_id != $music_id
+            LIMIT 10
+        ";
+                            
+        $related_songs_result = mysqli_query($conn, $related_songs_query);
+        if ($related_songs_result && mysqli_num_rows($related_songs_result) > 0) {
+        ?>
+        <ul class="related-songs w-full text-xs sm:text-base px-8 divide-y space-y-3 cursor-default hidden lg:block">
+            <h3 class="px-3">More related songs.</h3>
+            <?php 
+        
+        while ($song = mysqli_fetch_assoc($related_songs_result)) {
+        $song_id = $song['music_id'];
+        $title = $song['title'];
+        $artist_name = $song['artist_name'];
+        $song_year = $song['year'];
+        
+        ?>
             <li class="flex w-full bg-slate-200 px-2 py-2 rounded-xl text-black justify-between items-center space-x-3">
-                <button class="p-2 transtion duration-300 rounded-xl hover:bg-[#17153B] group focus:outline-none">
-                    <svg class="size-6 transtion duration-300 group-hover:text-slate-200" viewBox="0 0 24 24"
+                <button onclick="window.location.href = './music.php?music_id=<?= $song_id?>'"
+                    class="p-2 transition duration-300 rounded-xl hover:bg-[#17153B] group focus:outline-none">
+                    <svg class="size-6 transition duration-300 group-hover:text-slate-200" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <polygon points="5 3 19 12 5 21 5 3"></polygon>
                     </svg>
                 </button>
                 <div class="flex-1 text-gray-600">
-                    Artist - Title
+                    <?= $artist_name ?> - <?= $title ?>
                 </div>
                 <div class="text-xs text-gray-400">
-                    2:58
+                    <?= $song_year?>
                 </div>
             </li>
-        </ul> -->
+            <?php
+        }
+            echo '</ul>';
+        } else {
+        ?>
+            <ul
+                class="related-songs w-full flex items-center justify-center text-xs sm:text-base px-8 divide-y space-y-3 cursor-default">
+                <h3 class="px-3 text-gray-400">No related songs found.</h3>
+            </ul>
+            <?php
+        }
+        ?>
     </div>
-
 
 </section>
 
@@ -244,6 +263,7 @@ $(document).ready(function() {
         $('#profile-container').fadeOut(300);
         $('body').css('overflow', 'auto');
     });
+
     const audio = $('#audio')[0];
     const playBtn = $('#play-btn');
     const playIcon = $('#play-icon');
@@ -343,6 +363,257 @@ $(document).ready(function() {
 
         updateVolume(e);
     });
+
+    const musicId = <?php echo $_GET['music_id']; ?>;
+    let commentsPage = 1;
+
+    function fetchComments(page = 1, append = false) {
+        $.ajax({
+            url: '../controller/fetch_comments.controller.php',
+            method: 'GET',
+            data: {
+                music_id: musicId,
+                page: page
+            },
+            dataType: 'json',
+            success: function(data) {
+                if (data.error) {
+                    alert(data.error);
+                    return;
+                }
+
+                if (data.comments && data.comments.length > 0) {
+                    let commentsHtml = '';
+                    data.comments.forEach(comment => {
+                        commentsHtml += `
+                    <div class="comment" data-comment-id="${comment.comment_id}">
+                        <div class="bg-[#2A2553] p-4 rounded-lg">
+                            <div class="flex justify-between">
+                                <h4 class="font-medium text-gray-100">${comment.username}</h4>
+                                <span class="text-sm text-gray-400">${comment.created_at}</span>
+                            </div>
+                            <p class="mt-2 text-gray-300">${comment.content}</p>
+                        </div>
+                        <div class="flex items-center gap-1 px-2">
+                            <button class="reply-btn text-sm text-blue-400 hover:underline focus:outline-none"
+                                data-comment-id="${comment.comment_id}">
+                                Reply
+                            </button>
+                            ${comment.is_owner ? `
+                                <button class="delete-btn text-sm text-red-500 hover:text-red-700" data-comment-id="${comment.comment_id}">
+                                    Delete
+                                </button>` : ''}
+                        </div>
+
+                        <!-- Reply Input UI -->
+                        <div class="reply-input-container mt-2 hidden" id="reply-input-${comment.comment_id}">
+                            <textarea class="reply-textarea p-2 rounded-md bg-[#312B66] text-gray-300 w-full" placeholder="Write a reply..."></textarea>
+                            <button class="submit-reply-btn text-sm text-blue-400 hover:text-blue-500 mt-2" data-comment-id="${comment.comment_id}">
+                                Submit Reply
+                            </button>
+                        </div>
+
+                        <!-- Display Replies -->
+                        <div class="replies mt-4 pl-4 space-y-4">
+                            ${comment.replies.map(reply => `
+                                <div class="comment reply bg-[#312B66] p-3 rounded-lg" data-comment-id="${reply.comment_id}">
+                                    <div class="flex justify-between">
+                                        <h4 class="font-medium text-gray-100">${reply.username}</h4>
+                                        <span class="text-sm text-gray-400">${reply.created_at}</span>
+                                    </div>
+                                    <p class="mt-2 text-gray-300">${reply.content}</p>
+                                    ${reply.is_owner ? `
+                                        <button class="delete-btn text-sm text-red-500 hover:text-red-700" data-comment-id="${reply.comment_id}">
+                                            Delete
+                                        </button>` : ''}
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>`;
+                    });
+
+                    if (append) {
+                        $('#comments-list').append(commentsHtml);
+                    } else {
+                        $('#comments-list').html(commentsHtml);
+                    }
+
+                    $('.delete-btn').click(function() {
+                        const commentId = $(this).data('comment-id');
+                        deleteComment(commentId);
+                    });
+
+                    $('.reply-btn').click(function() {
+                        const commentId = $(this).data('comment-id');
+                        $(`#reply-input-${commentId}`).toggle();
+                    });
+
+                    $('.submit-reply-btn').click(function() {
+                        const commentId = $(this).data('comment-id');
+                        const replyContent = $(`#reply-input-${commentId} .reply-textarea`)
+                            .val();
+                        if (replyContent.trim() !== '') {
+                            submitReply(commentId, replyContent, musicId);
+                        } else {
+                            alert('Please write a reply.');
+                        }
+                    });
+                } else if (!append) {
+                    $('#comments-list').html('<p class="text-gray-400">No comments found.</p>');
+                    $('#load-more-section').hide();
+                } else {
+                    $('#load-more-section').hide();
+                }
+            },
+            error: function() {
+                alert('Failed to load comments.');
+            }
+        });
+    }
+
+    function submitReply(commentId, replyContent) {
+        $.ajax({
+            url: '../controller/check_login_status.php',
+            method: 'GET',
+            success: function(response) {
+                const data = JSON.parse(response);
+
+                if (data.logged_in) {
+                    $.ajax({
+                        url: '../controller/submit_reply.controller.php',
+                        method: 'POST',
+                        data: {
+                            comment_id: commentId,
+                            reply_content: replyContent,
+                            music_id: musicId
+                        },
+                        success: function(response) {
+                            const data = JSON.parse(response);
+                            if (data.success) {
+                                fetchComments();
+                            } else {
+                                alert(data.error || 'Failed to submit reply.');
+                            }
+                        },
+                        error: function() {
+                            alert('Failed to submit reply.');
+                        }
+                    });
+                } else {
+                    alert('You must be logged in to reply to comments.');
+                }
+            },
+            error: function() {
+                alert('Failed to check login status.');
+            }
+        });
+    }
+
+
+
+    function deleteComment(commentId) {
+        if (confirm('Are you sure you want to delete this comment?')) {
+            $.ajax({
+                url: '../controller/delete_comment.controller.php',
+                method: 'POST',
+                data: {
+                    comment_id: commentId
+                },
+                success: function(response) {
+                    const data = JSON.parse(response);
+                    if (data.success) {
+                        $(`.comment[data-comment-id="${commentId}"]`).remove();
+                    } else {
+                        alert(data.error || 'Failed to delete comment.');
+                    }
+                },
+                error: function() {
+                    alert('Failed to delete comment.');
+                }
+            });
+        }
+    }
+
+    fetchComments();
+
+
+
+    $('#post-comment-btn').click(function() {
+        const content = $('#comment-input').val().trim();
+        const messageArea = $('#message-area');
+
+        $.ajax({
+            url: '../controller/check_login_status.php',
+            method: 'GET',
+            success: function(response) {
+                const data = JSON.parse(response);
+                if (data.error) {
+                    messageArea.html(
+                            '<p class="text-yellow-500">You must be logged in to post a comment.</p>'
+                            )
+                        .fadeIn();
+                    setTimeout(() => {
+                        messageArea.fadeOut();
+                    }, 3000);
+                } else {
+                    if (content) {
+                        $.ajax({
+                            url: '../controller/post_comment.controller.php',
+                            method: 'POST',
+                            data: {
+                                music_id: musicId,
+                                content: content
+                            },
+                            success: function(response) {
+                                $('#comment-input').val('');
+                                fetchComments(1);
+
+                                messageArea.html(
+                                        '<p class="text-green-500">Comment posted successfully!</p>'
+                                        )
+                                    .fadeIn();
+                                setTimeout(() => {
+                                    messageArea.fadeOut();
+                                }, 3000);
+                            },
+                            error: function() {
+                                messageArea.html(
+                                        '<p class="text-red-500">Failed to comment. Please try again.</p>'
+                                        )
+                                    .fadeIn();
+                                setTimeout(() => {
+                                    messageArea.fadeOut();
+                                }, 3000);
+                            }
+                        });
+                    } else {
+                        messageArea.html(
+                                '<p class="text-yellow-500">Comment cannot be empty.</p>')
+                            .fadeIn();
+                        setTimeout(() => {
+                            messageArea.fadeOut();
+                        }, 3000);
+                    }
+                }
+            },
+            error: function() {
+                messageArea.html(
+                        '<p class="text-red-500">Error checking login status. Please try again.</p>'
+                        )
+                    .fadeIn();
+                setTimeout(() => {
+                    messageArea.fadeOut();
+                }, 3000);
+            }
+        });
+    });
+
+
+    $('#load-more-btn').click(function() {
+        commentsPage++;
+        fetchComments(commentsPage, true);
+    });
+
 
 });
 </script>

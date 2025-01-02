@@ -33,10 +33,44 @@
             Reserved.</span>
     </div>
 </footer>
+
+<script>
+<?= (ROUTE === 'index') ? "
+    <!-- slider script  -->
+            const contentSlider = $('#contentSlider');
+            const slides = $('.slide');
+            const indicatorDots = $('.indicator-dot');
+            const slideCount = slides.length;
+            let currentSlideIndex = 0;
+
+            function updateSlider() {
+                const offset = -currentSlideIndex * 100;
+                contentSlider.css('transform', `translateX(\${offset}%)`);
+                indicatorDots.removeClass('bg-[#85A947]').addClass('bg-[#123524]');
+                indicatorDots.eq(currentSlideIndex).removeClass('bg-[#123524]').addClass('bg-[#85A947]');
+            }
+
+            $('#nextButton').on('click', function () {
+                currentSlideIndex = (currentSlideIndex + 1) % slideCount;
+                updateSlider();
+            });
+
+            $('#prevButton').on('click', function () {
+                currentSlideIndex = (currentSlideIndex - 1 + slideCount) % slideCount;
+                updateSlider();
+            });
+
+            indicatorDots.on('click', function () {
+                currentSlideIndex = $(this).data('slide');
+                updateSlider();
+            });
+
+            updateSlider();
+     ":' ';
+    ?>
 <?php 
     if (isset($_SESSION['user_id']) && isset($_SESSION['user_email']) && isset($_SESSION['user_name'])) {
 ?>
-<script>
 $('#show-profile').on('click', function() {
     $('#profile-container')
         .fadeIn(300)
@@ -48,7 +82,9 @@ $('#close-profile').on('click', function() {
     $('#profile-container').fadeOut(300);
     $('body').css('overflow', 'auto');
 });
-
+<?php 
+}
+?>
 // Search functionlity 
 $(document).ready(function() {
     const searchBtn = document.getElementById('searchBtn');
@@ -211,6 +247,7 @@ $(document).ready(function() {
     );
 });
 </script>
-<?php 
-}
-?>
+
+</body>
+
+</html>

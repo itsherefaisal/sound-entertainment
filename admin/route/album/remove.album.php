@@ -71,10 +71,12 @@ $conn->close();
 
 <main class="w-full h-full bg-[#160F30] p-8 text-white">
     <h1 class="text-2xl font-bold mb-4">Delete Album</h1>
-    <p>Are you sure you want to delete the album titled <strong><?php echo htmlspecialchars($album['name']); ?></strong>?</p>
+    <p>Are you sure you want to delete the album titled
+        <strong><?php echo htmlspecialchars($album['name']); ?></strong>?</p>
     <form method="POST" action="" class="space-y-4">
         <input type="hidden" name="album_id" value="<?php echo $album['album_id']; ?>">
-        <button type="submit" name="confirm_delete" class="px-5 py-2 bg-[#FF2929] transition duration-200 bg-[#FF2929] hover:bg-[#C62E2E] text-white rounded">Delete</button>
+        <button type="submit" name="confirm_delete"
+            class="px-5 py-2 bg-[#FF2929] transition duration-200 bg-[#FF2929] hover:bg-[#C62E2E] text-white rounded">Delete</button>
         <a href="./view.album.php" class="px-5 py-2 bg-gray-600 hover:bg-gray-800 text-white rounded">Cancel</a>
     </form>
 </main>

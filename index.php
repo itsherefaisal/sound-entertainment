@@ -84,7 +84,7 @@ include_once("./includes/header.php");
 </section>
 <section id="latest-video" class="px-6 py-8 my-4 min-h-[300px]">
     <div class="video-top">
-        <h1 class="text-xl font-bold">Latest Movies</h1>
+        <h1 class="text-xl font-bold">Latest Videos</h1>
     </div>
 
     <div class="video-bottom my-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 lg:grid-cols-5 gap-6">
@@ -204,6 +204,3 @@ $(document).ready(function() {
     });
 });
 </script>
-</body>
-
-</html>

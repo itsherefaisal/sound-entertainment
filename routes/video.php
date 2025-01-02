@@ -33,7 +33,7 @@ $video_id = isset($_GET['video_id']) ? intval($_GET['video_id']) : 0;
         <div id="videoPlayerContainer"
             class="relative bg-black flex items-center justify-center pt-14 rounded-lg overflow-hidden shadow-lg group">
             <video id="video-player" class="w-full h-auto max-h-[650px] object-contain"
-                poster="../assets/media/images/<?= $video['cover_image']?>">
+                poster="../assets/media/images/<?= $video['cover_image']?>" autoplay>
                 <source src="../assets/media/videos/<?= $video['file_path']?>" type="video/mp4">
                 Your browser does not support the video tag.
             </video>

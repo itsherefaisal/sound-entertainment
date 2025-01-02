@@ -59,68 +59,6 @@ if (ROUTE === "index") {
         }
     }
     </style>
-
-    <?= (ROUTE === 'index') ? '
-    <!-- slider script  -->
-    <script>
-        var cont = 0;
-
-        function loopSlider() {
-            var xx = setInterval(function () {
-                switch (cont) {
-                    case 0: {
-                        $("#slider-1").fadeOut(400);
-                        $("#slider-2").delay(200).fadeIn(200);
-                        $("#sButton1").removeClass("bg-gray-200");
-                        $("#sButton2").addClass("bg-gray-200");
-                        cont = 1;
-                        break;
-                    }
-                    case 1:
-                        {
-                            $("#slider-2").fadeOut(400);
-                            $("#slider-1").delay(200).fadeIn(200);
-                            $("#sButton2").removeClass("bg-gray-200");
-                            $("#sButton1").addClass("bg-gray-200");
-                            cont = 0;
-                            break;
-                        }
-                }
-            }, 8000);
-        }
-
-        function reinitLoop(time) {
-            clearInterval(xx);
-            setTimeout(loopSlider(), time);
-        }
-
-        function sliderButton1() {
-
-            $("#slider-2").fadeOut(300);
-            $("#slider-1").delay(300).fadeIn(300);
-            $("#sButton2").removeClass("bg-gray-200");
-            $("#sButton1").addClass("bg-gray-200");
-            reinitLoop(6000);
-            cont = 0
-
-        }
-        function sliderButton2() {
-            $("#slider-1").fadeOut(300);
-            $("#slider-2").delay(300).fadeIn(300);
-            $("#sButton1").removeClass("bg-gray-200");
-            $("#sButton2").addClass("bg-gray-200");
-            reinitLoop(6000);
-            cont = 1
-
-        }
-        $(window).ready(function () {
-            $("#slider-2").hide();
-            $("#sButton1").addClass("bg-gray-200");
-            loopSlider();
-        });
-    </script>
-     ':' ';
-    ?>
 </head>
 
 <body class="bg-[#160F30] text-white">
@@ -166,7 +104,7 @@ if (ROUTE === "index") {
                             </div>
                         </div>
                         <div class="movie-cata-container flex flex-col py-2 px-4">
-                            <h1 class=" border-b py-2">Movie</h1>
+                            <h1 class=" border-b py-2">Video</h1>
                             <div class="movie-cata flex my-2">
                                 <a href="<?= (ROUTE === "index") ? './routes/categories.php?filter=year&type=video' : './categories.php?filter=year&type=video'; ?>"
                                     class="text-sm flex py-2 px-4 mx-1 min-w-28 truncate rounded-md bg-[#2E236C] transition duration-300 hover:bg-[#17153B] border border-transparent hover:border-gray-200">Year</a>
@@ -181,24 +119,6 @@ if (ROUTE === "index") {
                 </div>
             </div>
 
-            <!-- <div class="search-container relative">
-                <label for="search-bar"
-                    class="hidden md:flex items-center border border-gray-500 cursor-text pl-3 bg-[#17153B] text-white rounded">
-                    <input type="text" placeholder="Search music or videos..." id="search-bar"
-                        class="text-xs text-gray-300 w-48 bg-transparent outline-none border-none" />
-                    <button class="text-sm text-gray-400 size-9 p-2 rounded">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-full h-full" viewBox="0 0 24 24"
-                            fill="currentColor">
-                            <path
-                                d="M11 2C15.968 2 20 6.032 20 11C20 15.968 15.968 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2ZM11 18C14.8675 18 18 14.8675 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18ZM19.4853 18.0711L22.3137 20.8995L20.8995 22.3137L18.0711 19.4853L19.4853 18.0711Z">
-                            </path>
-                        </svg>
-                    </button>
-                </label>
-                <div
-                    class="search-list z-50 absolute top-full max-h-[300px] overflow-y-auto w-full bg-[#17153B] flex flex-col gap-1 p-2 hidden">
-                </div>
-            </div> -->
             <button id="searchBtn" class="bg-[#687EFF] transition duration-200 hover:bg-[#80B3FF] text-white p-3 rounded-full">
                 <svg xmlns="http://www.w3.org/2000/svg" class="size-5 stroke-2" viewBox="0 0 24 24" fill="currentColor">
                     <path
@@ -255,8 +175,6 @@ if (ROUTE === "index") {
                         <?php endif; ?>
                         <button id="show-profile" class="block truncate px-8 py-2 hover:bg-[#2E236C]">My
                             Account</button>
-                        <!-- <a href="<?= (ROUTE === "index") ? './routes/favorites.php' : './favorites.php' ?>"
-                            class="block truncate px-8 py-2 hover:bg-[#2E236C]">Favorites</a> -->
                         <a href="<?= (ROUTE === "index") ? './routes/logout.php' : './logout.php' ?>"
                             class="block truncate px-8 py-2 hover:bg-[#2E236C]">Logout</a>
                     </div>
@@ -335,35 +253,82 @@ if (ROUTE === "index") {
             ?>
         </nav>
         <?= (ROUTE === "index") ? '
-        <div class="sliderAx h-auto w-full max-w-container mx-auto">
-            <div id="slider-1">
-                <div class="bg-cover bg-center flex items-center h-[540px] text-white py-24 px-10 object-fill"
-                    style="background-image: url('.'./assets/images/music-2.jpg'.'); background-size: cover; background-repeat: no-repeat; background-position: center;">
-                    <div class="md:w-1/2">
-                        <p class="font-bold text-sm uppercase">Music</p>
-                        <p class="text-3xl font-bold">Listen your favorite music</p>
-                        <p class="text-2xl mb-10 leading-none">Anytime, Anywhere</p>
-                    </div>
+            <div class="relative w-full mx-auto overflow-hidden rounded-lg shadow-lg slider-container">
+        <div id="contentSlider" class="flex transition-transform duration-500 ease-in-out">
+            <div id="slideMusic"
+                class="slide flex-none w-full bg-cover bg-center flex items-center h-[540px] text-white py-24 px-10 relative"
+                style="background-image: url('.'./assets/images/music-2.jpg'.'); background-size: cover; background-repeat: no-repeat; background-position: center;">
+                <div class="absolute inset-0 bg-black opacity-50"></div>
+                        
+                <div class="content-wrapper md:w-1/2 z-30">
+                    <p class="slide-title font-bold text-sm uppercase">Music</p>
+                    <p class="slide-heading text-3xl font-bold">Your Gateway to a World of Music</p>
+                    <p class="slide-subheading text-sm mb-10 leading-none">
+                        Explore millions of tracks from your favorite artists. Let the rhythm set the tone for your day—anytime,
+                        anywhere.
+                    </p>
                 </div>
-                <br>
+            </div>
+                        
+            <div id="slideVideos"
+                class="slide flex-none w-full bg-cover bg-center flex items-center h-[540px] text-white py-24 px-10 relative"
+                style="background-image: url('.'./assets/images/video-1.jpg'.'); background-size: cover; background-repeat: no-repeat; background-position: center;">
+                <div class="absolute inset-0 bg-black opacity-50"></div>
+                        
+                <div class="content-wrapper md:w-1/2 z-30">
+                    <p class="slide-title font-bold text-sm uppercase">Videos</p>
+                    <p class="slide-heading text-3xl font-bold">Unlimited Video Entertainment</p>
+                    <p class="slide-subheading text-sm mb-10 leading-none">
+                        Discover exclusive videos, trending clips, and cinematic experiences that redefine your leisure time.
+                    </p>
+                </div>
+            </div>
+                        
+            <div id="slidePodcasts"
+                class="slide flex-none w-full bg-cover bg-center flex items-center h-[540px] text-white py-24 px-10 relative"
+                style="background-image: url('.'./assets/images/podcast.jpg'.'); background-size: cover; background-repeat: no-repeat; background-position: center;">
+                <div class="absolute inset-0 bg-black opacity-50"></div>
+                        
+                <div class="content-wrapper md:w-1/2 z-30">
+                    <p class="slide-title font-bold text-sm uppercase">Podcasts</p>
+                    <p class="slide-heading text-3xl font-bold">Inspiring Stories and Conversations</p>
+                    <p class="slide-subheading text-sm mb-10 leading-none">
+                        Tune into thought-provoking podcasts and enriching stories that spark your curiosity and elevate your
+                        moments.
+                    </p>
+                </div>
             </div>
 
-            <div id="slider-2">
-                <div class="bg-cover bg-top  flex items-center h-[540px] text-white py-24 px-10 object-fill"
-                    style="background-image: url('.'./assets/images/video-1.jpg'.'); background-size: cover; background-repeat: no-repeat; background-position: center;">
-                    <div class="md:w-1/2">
-                        <p class="font-bold text-sm uppercase">Videos</p>
-                        <p class="text-3xl font-bold">Watch your favorite videos</p>
-                        <p class="text-2xl mb-10 leading-none">free time enjoyment</p>
-                    </div>
-                </div>
-                <br>
-            </div>
         </div>
 
-        <div class="flex justify-between w-12 mx-auto pb-1">
-            <button id="sButton1" onclick="sliderButton1()" class="bg-gray-400 rounded-full w-4 pb-2 "></button>
-            <button id="sButton2" onclick="sliderButton2() " class="bg-gray-400 rounded-full w-4 p-2"></button>
+        <div
+            class="indicator-wrapper absolute w-full max-w-xl bottom-4 left-1/2 transform -translate-x-1/2 flex items-center justify-center space-x-2 py-2">
+            <button id="prevButton"
+                class="absolute top-1/2 left-2 -translate-y-1/2 bg-[#85A947] transition-bg duration-300 focus:bg-[#3E7B27] text-white rounded-full flex items-center justify-center shadow-md hover:bg-[#123524]">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-8" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M11.8284 12.0005L14.6569 14.8289L13.2426 16.2431L9 12.0005L13.2426 7.75781L14.6569 9.17203L11.8284 12.0005Z">
+                    </path>
+                </svg>
+            </button>
+            <button id="nextButton"
+                class="absolute top-1/2 right-2 -translate-y-1/2 bg-[#85A947] transition-bg duration-300 focus:bg-[#3E7B27] text-white rounded-full flex items-center justify-center shadow-md hover:bg-[#123524]">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-8" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M12.1717 12.0005L9.34326 9.17203L10.7575 7.75781L15.0001 12.0005L10.7575 16.2431L9.34326 14.8289L12.1717 12.0005Z">
+                    </path>
+                </svg>
+            </button>
+            <div data-slide="0"
+                class="indicator-dot size-3 rounded-full bg-[#85A947] hover:bg-[#85A947] transition-all duration-300 cursor-pointer">
+            </div>
+            <div data-slide="1"
+                class="indicator-dot size-3 rounded-full bg-[#85A947] hover:bg-[#85A947] transition-all duration-300 cursor-pointer">
+            </div>
+            <div data-slide="2"
+                class="indicator-dot size-3 rounded-full bg-[#85A947] hover:bg-[#85A947] transition-all duration-300 cursor-pointer">
+            </div>
         </div>
+    </div>
         ' : ''; ?>
     </header>
