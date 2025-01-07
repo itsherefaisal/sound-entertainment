@@ -62,7 +62,7 @@ Before you begin, ensure you have the following installed:
 1. Open your browser and go to:  
    `http://localhost/phpmyadmin`
 2. Create a new database:
-   - **Database Name**: `sound-entertainment`
+   - **Database Name**: `sound_entertainment`
 3. Import the database:
    - Click on the **Import** tab.
    - Select the database file provided in the project folder:
@@ -78,31 +78,8 @@ Before you begin, ensure you have the following installed:
 ## 🔑 Default Login Details
 | Role       | Username           | Password  |
 |------------|--------------------|-----------|
-| **Admin**  | `admin@example.com` | `admin123` |
-| **User**   | `user@example.com`  | `user123`  |
-
----
-
-## 🎉 Website Structure
-
-### Frontend Pages
-| Page               | Description                             |
-|--------------------|-----------------------------------------|
-| `index.php`        | Homepage with latest content.          |
-| `music.php`        | Music listing page.                    |
-| `videos.php`       | Video listing page.                    |
-| `search.php`       | Search results page.                   |
-| `profile.php`      | User profile page.                     |
-| `signup.php`       | User registration form.                |
-| `login.php`        | User login form.                       |
-
-### Admin Panel
-| Page                         | Description                        |
-|------------------------------|------------------------------------|
-| `admin/dashboard.php`        | Admin dashboard overview.         |
-| `admin/manage-content.php`   | Add, edit, or delete media.        |
-| `admin/manage-users.php`     | Manage user accounts.             |
-| `admin/settings.php`         | Configure website settings.       |
+| **Admin**  | `admin@gmail.com` | `admin123` |
+| **User**   | `user@example.com`  | `user12345`  |
 
 ---
 
